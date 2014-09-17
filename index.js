@@ -16,6 +16,10 @@ app.get('/scatter.js', function(request, response) {
   response.sendfile('bootstrap/scatter.js')
 })
 
+app.get('/testResponse.json', function(request, response) {
+  response.sendfile('testResponse.json')
+})
+
 /*
 app.get('/css/bootstrap.min.css', function(request, response) {
   response.sendfile('bootstrap/css/bootstrap.min.css')
