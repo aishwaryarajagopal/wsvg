@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(t,n,e){function r(e){if(!n[e]){var o=n[e]={exports:{}};t[e][0].call(o.exports,function(n){var o=t[e][1][n];return r(o?o:n)},o,o.exports)}return n[e].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<e.length;o++)r(e[o]);return r}({D5DuLP:[function(t,n){function e(t,n){var e=r[t];return e?e.apply(this,n):(o[t]||(o[t]=[]),void o[t].push(n))}var r={},o={};n.exports=e,e.queues=o,e.handlers=r},{}],handle:[function(t,n){n.exports=t("D5DuLP")},{}],G9z0Bl:[function(t,n){function e(){var t=l.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&p&&p.body){l.proto="https"===f.split(":")[0]||t.sslForHttp?"https://":"http://",i("mark",["onload",a()]);var n=p.createElement("script");n.src=l.proto+t.agent,p.body.appendChild(n)}}function r(){"complete"===p.readyState&&o()}function o(){i("mark",["domContent",a()])}function a(){return(new Date).getTime()}var i=t("handle"),u=window,p=u.document,s="addEventListener",c="attachEvent",f=(""+location).split("?")[0],l=n.exports={offset:a(),origin:f,features:[]};p[s]?(p[s]("DOMContentLoaded",o,!1),u[s]("load",e,!1)):(p[c]("onreadystatechange",r),u[c]("onload",e)),i("mark",["firstbyte",a()])},{handle:"D5DuLP"}],loader:[function(t,n){n.exports=t("G9z0Bl")},{}]},{},["G9z0Bl"]);</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"applicationTime":0,"applicationID":"4927710","transactionName":"NgNRYEJWXhcDVxFYCw9JZkZZGA==","beacon":"beacon-1.newrelic.com","queueTime":10,"licenseKey":"9bef732581","errorBeacon":"bam.nr-data.net","agent":"js-agent.newrelic.com/nr-412.min.js"}</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bicentric Diagrams</title>
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap-select.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/jwerty.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- <script src="/static/bootstrap-select.min.js"></script> -->
+    <script src="/static/select2.min.js"></script>
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="/static/d3-tip.min.js"></script>
+
+
+    <!-- <script src="/static/liquidmetal.min.js" type="text/javascript"></script>
+    <script src="/static/jquery.flexselect.min.js" type="text/javascript"></script>
+
+    <link href="/static/flexselect.min.css" rel="stylesheet"> -->
+    <link href="/static/select2.min.css" rel="stylesheet">
+    <link href="/static/my.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div id="sidebar">
+<!--       <div class="group last col-xs-12">
+        <h2>Bicentric<br>Diagrams</h2><br>
+      </div>
+ -->
+      <div class="group last col-xs-12">
+        <br><span class="title sub">Context</span><br>
+        <select id="dataset" class="form-control">
+          <option value="tech" selected="selected">Technologies</option>
+          <option value="univ">University Collaboration</option>
+          <option value="apps">Health Apps</option>
+        </select>
+      </div>
+
+      <div class="group col-xs-12 wrapwraptech1">
+        <span class="title sub"><span class="entity">Technology</span> 1</span><br>
+        <!-- <div class="wraptech1"> -->
+        <select id="tech1" class="form-control input-sm" data-style="btn-dropdown" data-size="10">
+          <option>Loading...</option>
+        </select>
+        <!-- </div> -->
+      </div>
+
+      <div class="group continue last col-xs-12 wrapwraptech2">
+        <span class="title sub"><span class="entity">Technology</span> 2</span><br>
+        <!-- <div class="wraptech2"> -->
+        <select id="tech2" class="form-control input-sm" data-style="btn-dropdown" data-size="10">
+          <option>Loading...</option>
+        </select>
+        <!-- </div> -->
+      </div>
+
+      <!-- <hr> -->
+
+      <div class="group col-xs-12">
+        <button id="btnDrawGraph" type="button" class="btn btn-primary btn-lg btn-block">Compare</button>
+      </div>
+      
+      <div class="group col-xs-12">
+        <div id="error" class="alert alert-danger" role="alert" style="display:none;">
+          <strong>Error!</strong><br><small>Selection cannot be the same.</small>
+        </div>
+      </div>
+
+      <div id="footer">
+        <div class="group col-xs-12 text-right" style="line-height:100%;">
+          <small style="font-size:9px;">
+            Powered by 
+            <a href="http://d3js.org/" target="_blank">D3.js</a> | 
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a> | 
+            <a href="http://networkx.github.io" target="_blank">NetworkX</a><br>
+            <a href="http://heroku.com" target="_blank">Heroku</a> | 
+            <a href="http://compose.io" target="_blank">Compose</a> | 
+            <a href="http://favicon.herokuapp.com" target="_blank">SimplyFavicon</a><br>
+            Data from <a href="http://www.northernlight.com" target="_blank">Northern Light Group</a> | 
+            <a href="http://dl.acm.org" target="_blank">ACM</a> | 
+            <a href="http://amazon.com" target="_blank">Amazon</a><br>
+            By <a href="http://isye.gatech.edu/~hpark74" target="_blank">Hyunwoo Park</a> & <a href="http://www.ic.gatech.edu/people/rahul-basole" target="_blank">Rahul C. Basole</a>
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div id="control">
+      <a href="#" data-toggle="tooltip" title="Hide Sidebar<br>[ctrl+alt+space]"><span id="slide" class="glyphicon glyphicon-chevron-left"></span></a>
+      <br><br>
+      <a href="#" data-toggle="tooltip" title="Zoom In<br>[alt+PgUp]"><span id="zoomin" class="glyphicon glyphicon-zoom-in"></span></a>
+      <a href="#" data-toggle="tooltip" title="Zoom Out<br>[alt+PgDn]"><span id="zoomout" class="glyphicon glyphicon-zoom-out"></span></a>
+      <br><br>
+      <a href="#" data-toggle="tooltip" title="Move Up<br>[alt+&#8593;]"><span id="panup" class="glyphicon glyphicon-arrow-up"></span></a>
+      <a href="#" data-toggle="tooltip" title="Move Left<br>[alt+&#8592;]"><span id="panleft" class="glyphicon glyphicon-arrow-left"></span></a>
+      <a href="#" data-toggle="tooltip" title="Move Right<br>[alt+&#8594;]"><span id="panright" class="glyphicon glyphicon-arrow-right"></span></a>
+      <a href="#" data-toggle="tooltip" title="Move Down<br>[alt+&#8595;]"><span id="pandown" class="glyphicon glyphicon-arrow-down"></span></a>
+      <br><br>
+      <a href="#" data-toggle="tooltip" title="Reset View<br>[alt+0]"><span id="viewreset" class="glyphicon glyphicon-screenshot"></span></a>
+      <br><br>
+      <a href="#" data-toggle="tooltip" title="Help<br>[alt+H]"><span id="help" class="glyphicon glyphicon-question-sign"></span></a>
+    </div>
+
+    <div id="content">
+      <div id="subcontrol" class="navbar navbar-default navbar-static-top" style="display:none;">
+        <div class="navbar-form navbar-right form-group">
+          <input data-toggle="tooltip" title="[alt+/]" id="quicksearch" type="text" class="form-control" placeholder="Quick Search">
+          <button data-toggle="tooltip" title="[alt+delete]" id="clearsearch" type="button" class="btn btn-default">Clear</button>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" data-toggle="tooltip" title="[alt+C]" id="btnLegend" class="suboption"><span class="label label-primary" style="font-size:12px;font-weight:bold;">Color Legend: On</span></a></li>
+          <li><a href="#" data-toggle="tooltip" title="[alt+G]" id="btnGuideline" class="suboption"><span class="label label-primary" style="font-size:12px;font-weight:bold;">Guideline: On</span></a></li>
+          <li><a href="#" data-toggle="tooltip" title="[alt+L]" id="btnLabel" class="suboption"><span class="label label-default" style="font-size:12px;font-weight:bold;">Label: Off</span></a></li>
+          <li><a href="#" data-toggle="tooltip" title="[alt+E]<br>(Note: Showing all edges will slow down the application.)" id="btnEdge" class="suboption"><span class="label label-default" style="font-size:12px;font-weight:bold;">Edge: Off</span></a></li>
+        </ul>
+      </div>
+
+      <div class="container-fluid">
+        <svg id="graph"></svg>
+      </div>
+    </div>
+
+
+    <div id="legend">
+      <ul id="techLegend" style="display:none;">
+        <li><span class="bullet0">&#9679;</span> <small>Smartphones</small></li>
+        <li><span class="bullet1">&#9679;</span> <small>Tablet Computing</small></li>
+        <li><span class="bullet2">&#9679;</span> <small>Cloud Computing and Storage</small></li>
+        <li><span class="bullet3">&#9679;</span> <small>Android Operating System</small></li>
+        <li><span class="bullet4">&#9679;</span> <small>Networking Applications and Hardware</small></li>
+        <li><span class="bullet5">&#9679;</span> <small>Financial Information Systems</small></li>
+        <li><span class="bullet6">&#9679;</span> <small>iOS</small></li>
+        <li><span class="bullet7">&#9679;</span> <small>Others</small></li>
+      </ul>
+      <ul id="univLegend" style="display:none;">
+        <li><span class="bullet0">&#9679;</span> <small>Europe</small></li>
+        <li><span class="bullet1">&#9679;</span> <small>North America</small></li>
+        <li><span class="bullet2">&#9679;</span> <small>Asia</small></li>
+        <li><span class="bullet3">&#9679;</span> <small>Australia</small></li>
+        <li><span class="bullet4">&#9679;</span> <small>Others</small></li>
+      </ul>
+      <ul id="appsLegend" style="display:none;">
+        <li><span class="bullet0">&#9679;</span> <small>Diet</small></li>
+        <li><span class="bullet1">&#9679;</span> <small>Medical</small></li>
+        <li><span class="bullet2">&#9679;</span> <small>Exercise</small></li>
+        <li><span class="bullet3">&#9679;</span> <small>Meditation</small></li>
+        <li><span class="bullet4">&#9679;</span> <small>Pregnancy</small></li>
+        <li><span class="bullet5">&#9679;</span> <small>Sleep</small></li>
+      </ul>
+    </div>
+
+
+    <div id="spinner">
+      <div class="loading-spinner" style="width: 300px; margin-left: -150px; margin-top: -150px;">
+        <div class="part-splash">
+          <h1>Bicentric Diagrams</h1><br><br>
+          <p>Please be patient.</p>
+          <p>It may take up to 30 seconds.</p>
+          <br><br>
+        </div>
+        <div class="part-help" style="display:none;">
+          <img src="/static/help.png">
+        </div>
+        <div class="part-loading">
+          <p id="progressMsg">Loading Context...</p>
+          <div class="progress progress-striped active">
+            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">30%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/static/ie10-viewport-bug-workaround.js"></script>
+    
+    <script src="/static/my.min.js"></script>
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-6401295-12', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>
