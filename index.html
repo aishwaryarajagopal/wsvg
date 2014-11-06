@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="arjun010">
 
     <title>Genome Visualiation Tool</title>
-
+    <script src="js/d3/d3.js" charset="utf-8"></script>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <style>
+    <style type="text/css">
     body {
         padding-top: 70px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     }
+      body { font-family: "Helvetica Neue", Helvetica, sans-serif; }
+      td { vertical-align: top; }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -28,6 +28,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script type="text/javascript" src="js/d3.phylogram.js"></script>
+<script type="text/javascript" src="js/newick.js"></script>
 
 </head>
 
@@ -48,31 +50,57 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <div id="selection bar" align="center">
-    <select>
-      <option value="Organism 1">Organism 1</option>
-    <option value="Organism 2">Organism 2</option>
-    <option value="Organism 3">Organism 3</option>
-        <option value="Organism 4">Organism 4</option>
+    <select id="organism1">
+      <option value="WhaleShark">Whale Shark</option>
+    <option value="SandbarShark">Sandbar Shark</option>
+    <option value="BlacktipReefShark">Blacktip Reef Shark</option>
+        <option value="GiantGrouper">Giant Grouper</option>
+        <option value="GiantTrevally">Giant Trevally</option>
+        <option value="Humans">Humans</option>
+        <option value="SaltWaterCrocodile">Salt Water Crocodile</option>
+        <option value="Wobblegong">Wobblegong</option>
+        <option value="ZebraFish">Zebra Fish</option>
+        <option value="HarborSeal">Harbor Seal</option>
     </select>
-    <select>
-      <option value="Organism 1">Organism 1</option>
-    <option value="Organism 2">Organism 2</option>
-    <option value="Organism 3">Organism 3</option>
-        <option value="Organism 4">Organism 4</option>
+    <select id="organism2">
+      <option value="WhaleShark">Whale Shark</option>
+    <option value="SandbarShark">Sandbar Shark</option>
+    <option value="BlacktipReefShark">Blacktip Reef Shark</option>
+        <option value="GiantGrouper">Giant Grouper</option>
+        <option value="GiantTrevally">Giant Trevally</option>
+        <option value="Humans">Humans</option>
+        <option value="SaltWaterCrocodile">Salt Water Crocodile</option>
+        <option value="Wobblegong">Wobblegong</option>
+        <option value="ZebraFish">Zebra Fish</option>
+        <option value="HarborSeal">Harbor Seal</option>
     </select>
-    <select>
-      <option value="Organism 1">Organism 1</option>
-    <option value="Organism 2">Organism 2</option>
-    <option value="Organism 3">Organism 3</option>
-        <option value="Organism 4">Organism 4</option>
+    <select id="organism3">
+      <option value="WhaleShark">Whale Shark</option>
+    <option value="SandbarShark">Sandbar Shark</option>
+    <option value="BlacktipReefShark">Blacktip Reef Shark</option>
+        <option value="GiantGrouper">Giant Grouper</option>
+        <option value="GiantTrevally">Giant Trevally</option>
+        <option value="Humans">Humans</option>
+        <option value="SaltWaterCrocodile">Salt Water Crocodile</option>
+        <option value="Wobblegong">Wobblegong</option>
+        <option value="ZebraFish">Zebra Fish</option>
+        <option value="HarborSeal">Harbor Seal</option>
     </select>
-    <select>
-      <option value="Organism 1">Organism 1</option>
-    <option value="Organism 2">Organism 2</option>
-    <option value="Organism 3">Organism 3</option>
-        <option value="Organism 4">Organism 4</option>
+    <select id="organism4">
+      <option value="WhaleShark">Whale Shark</option>
+    <option value="SandbarShark">Sandbar Shark</option>
+    <option value="BlacktipReefShark">Blacktip Reef Shark</option>
+        <option value="GiantGrouper">Giant Grouper</option>
+        <option value="GiantTrevally">Giant Trevally</option>
+        <option value="Humans">Humans</option>
+        <option value="SaltWaterCrocodile">Salt Water Crocodile</option>
+        <option value="Wobblegong">Wobblegong</option>
+        <option value="ZebraFish">Zebra Fish</option>
+        <option value="HarborSeal">Harbor Seal</option>
+        
+
     </select>
-    <button>Visualize</button>
+    <button onclick="setUpPhylogram()">New Phylo</button>
   </div>
             </div>
             <!-- /.navbar-collapse -->
@@ -84,19 +112,47 @@
     <div class="container">
 
         <div class="row">
-           
+            <div id="treeViz"></div>   
         </div>
         <!-- /.row -->
 
     </div>
     <!-- /.container -->
 
-    <!-- jQuery Version 1.11.0 -->
     <script src="js/jquery-1.11.0.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
 </body>
 
+<script type="text/javascript">
+//PhyloTree Viz start
+function setUpPhylogram(){
+selectedList.push($("#organism1 option:selected").text());
+selectedList.push($("#organism2 option:selected").text());
+selectedList.push($("#organism3 option:selected").text());
+selectedList.push($("#organism4 option:selected").text());
+//console.log("selected list: "+selectedList);
+
+var myNewick = Newick.parse("(((((Blacktip Reef Shark:0.03585079,Sandbar Shark:0.03817814):0.06951782,(Whale Shark:0.08480993,Wobblegong:0.08552503):0.03996305):0.10105021,(Zebra Fish:0.18717747,(Giant Trevally:0.12005668,Giant Grouper:0.12993306):0.06658514):0.04722950):0.07006108,(Harbor Seal:0.15013151,Humans:0.17840333):0.12409540):0.00351495,Salt Water Crocodile:0.31732372);")
+
+
+        var newickNodes = []
+        function buildNewickNodes(node, callback) {
+          newickNodes.push(node)
+          if (node.branchset) {
+            for (var i=0; i < node.branchset.length; i++) {
+              buildNewickNodes(node.branchset[i])
+            }
+          }
+        }
+        buildNewickNodes(myNewick)
+
+d3.phylogram.build('#treeViz', myNewick, {
+          width: 300,
+          height: 400
+        });
+}
+//PhyloTree Viz end
+</script>
 </html>
