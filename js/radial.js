@@ -42,13 +42,13 @@ var geneBundle = d3.layout.bundle();
 
 // The svg that is appended to the game-network div
 // Give enough space to layout the radial graph
-var geneSvg = d3.select("#gene-network").append("svg")
+var radialSvg = d3.select("#radialVis").append("svg")
     .attr("width", circlew)
     .attr("height", diameter+240)
     .append("g")
     .attr("transform", "translate(" + (radius + 75) + "," + (radius - 50) + ")");
 
-var svgDefs = geneSvg.append("svg:defs");
+var svgDefs = radialSvg.append("svg:defs");
 
 // Define the line type that will be used to connect genes
 var line = d3.svg.line.radial()
@@ -127,7 +127,7 @@ function drawGeneChart(selectedSpecies){
 
     var nodes = geneCluster.nodes(geneMap)
 
-    geneSvg.selectAll(".node-dot")
+    radialSvg.selectAll(".node-dot")
         .data(nodes.filter(function(n) { return n.depth == 2; }))
         .enter().append("g")
         .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
@@ -146,7 +146,7 @@ function drawGeneChart(selectedSpecies){
         .on("mouseover", showGeneConnections)
         .on("mouseout", hideGeneConnections)
 
-    geneSvg.selectAll(".node")
+    radialSvg.selectAll(".node")
         .data(nodes.filter(function(n) { return n.depth == 2; }))
         .enter().append("g")
         .attr("class", 'node')
@@ -185,7 +185,7 @@ function drawGeneChart(selectedSpecies){
         }
     }
 
-    geneSvg.selectAll(".links")
+    radialSvg.selectAll(".links")
         .data(geneBundle(mergedLinks))
         .enter().append("path")
         .attr("class", function(d){
@@ -225,31 +225,31 @@ function getGeneColor(species, length){
 
 function showGeneConnections(d) {
 
-    geneSvg.selectAll('.circle-text')
+    radialSvg.selectAll('.circle-text')
         .classed('circle-text-dim', true);
 
-    geneSvg.select('#nodetext-' + d.className)
+    radialSvg.select('#nodetext-' + d.className)
         .classed('highlight', true)
         .classed('circle-text-dim', false);
 
-    geneSvg.selectAll('.node-dot')
+    radialSvg.selectAll('.node-dot')
         .style("opacity", .05)
 
-    geneSvg.selectAll('path.links')
+    radialSvg.selectAll('path.links')
         .style("stroke-opacity", .01)
 
-    geneSvg.selectAll('path.link-' + d.className)
+    radialSvg.selectAll('path.link-' + d.className)
         .style("stroke-opacity",1)
 
-    geneSvg.selectAll('.nodedot-' + d.className)
+    radialSvg.selectAll('.nodedot-' + d.className)
         .style("opacity",1)
 
     d.connectedNodes.forEach(function(n){
-        geneSvg.select('#nodetext-' + n.className)
+        radialSvg.select('#nodetext-' + n.className)
             .classed('highlight', true)
             .classed('circle-text-dim', false);
 
-        geneSvg.selectAll('.nodedot-' + n.className)
+        radialSvg.selectAll('.nodedot-' + n.className)
             .style("opacity", 1)
     });
 
@@ -293,14 +293,14 @@ function showGeneConnections(d) {
 
 function hideGeneConnections(d) {
     //$("#node-info").hide();
-    geneSvg.selectAll('path.links')
+    radialSvg.selectAll('path.links')
         .style("stroke-opacity", 1);
 
-    geneSvg.selectAll('.circle-text')
+    radialSvg.selectAll('.circle-text')
         .classed('circle-text-dim', false)
         .classed('highlight', false);
 
-    geneSvg.selectAll('.node-dot')
+    radialSvg.selectAll('.node-dot')
         .style("opacity", 1);
 }
 

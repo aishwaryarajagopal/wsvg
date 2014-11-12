@@ -89,7 +89,7 @@ if (!d3) { throw "d3 wasn't included!"};
   
   
   d3.phylogram.build = function(selector, nodes, options) {
-    d3.selectAll("svg").remove();
+    //d3.selectAll("svg").remove();
     options = options || {}
     var w = options.width || d3.select(selector).style('width') || d3.select(selector).attr('width'),
         h = options.height || d3.select(selector).style('height') || d3.select(selector).attr('height'),
