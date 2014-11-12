@@ -7,10 +7,13 @@
     <meta name="description" content="">
     <meta name="author" content="arjun010">
 
-    <title>Genome Visualiation Tool</title>
-    <script src="js/d3/d3.js" charset="utf-8"></script>
+    <title>Genome Visualization Tool</title>
+
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS that came w/ radial vis -->
+    <link href="css/guardian.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://pasteup.guim.co.uk/0.0.3/css/pasteup.min.css">
 
     <!-- Custom CSS -->
     <style type="text/css">
@@ -22,14 +25,9 @@
       td { vertical-align: top; }
     </style>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-<script type="text/javascript" src="js/d3.phylogram.js"></script>
-<script type="text/javascript" src="js/newick.js"></script>
+
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
 </head>
 
@@ -50,78 +48,116 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <div id="selection bar" align="center">
-    <select id="organism1">
-      <option value="WhaleShark">Whale Shark</option>
-    <option value="SandbarShark">Sandbar Shark</option>
-    <option value="BlacktipReefShark">Blacktip Reef Shark</option>
-        <option value="GiantGrouper">Giant Grouper</option>
-        <option value="GiantTrevally">Giant Trevally</option>
-        <option value="Humans">Humans</option>
-        <option value="SaltWaterCrocodile">Salt Water Crocodile</option>
-        <option value="Wobblegong">Wobblegong</option>
-        <option value="ZebraFish">Zebra Fish</option>
-        <option value="HarborSeal">Harbor Seal</option>
-    </select>
-    <select id="organism2">
-      <option value="WhaleShark">Whale Shark</option>
-    <option value="SandbarShark">Sandbar Shark</option>
-    <option value="BlacktipReefShark">Blacktip Reef Shark</option>
-        <option value="GiantGrouper">Giant Grouper</option>
-        <option value="GiantTrevally">Giant Trevally</option>
-        <option value="Humans">Humans</option>
-        <option value="SaltWaterCrocodile">Salt Water Crocodile</option>
-        <option value="Wobblegong">Wobblegong</option>
-        <option value="ZebraFish">Zebra Fish</option>
-        <option value="HarborSeal">Harbor Seal</option>
-    </select>
-    <select id="organism3">
-      <option value="WhaleShark">Whale Shark</option>
-    <option value="SandbarShark">Sandbar Shark</option>
-    <option value="BlacktipReefShark">Blacktip Reef Shark</option>
-        <option value="GiantGrouper">Giant Grouper</option>
-        <option value="GiantTrevally">Giant Trevally</option>
-        <option value="Humans">Humans</option>
-        <option value="SaltWaterCrocodile">Salt Water Crocodile</option>
-        <option value="Wobblegong">Wobblegong</option>
-        <option value="ZebraFish">Zebra Fish</option>
-        <option value="HarborSeal">Harbor Seal</option>
-    </select>
-    <select id="organism4">
-      <option value="WhaleShark">Whale Shark</option>
-    <option value="SandbarShark">Sandbar Shark</option>
-    <option value="BlacktipReefShark">Blacktip Reef Shark</option>
-        <option value="GiantGrouper">Giant Grouper</option>
-        <option value="GiantTrevally">Giant Trevally</option>
-        <option value="Humans">Humans</option>
-        <option value="SaltWaterCrocodile">Salt Water Crocodile</option>
-        <option value="Wobblegong">Wobblegong</option>
-        <option value="ZebraFish">Zebra Fish</option>
-        <option value="HarborSeal">Harbor Seal</option>
-        
-
-    </select>
-    <button onclick="setUpPhylogram()">New Phylo</button>
-  </div>
+                    <select id="organism1">
+                        <option value="WhaleShark">Whale Shark</option>
+                        <option value="SandbarShark">Sandbar Shark</option>
+                        <option value="BlacktipReefShark">Blacktip Reef Shark</option>
+                        <option value="GiantGrouper">Giant Grouper</option>
+                        <option value="GiantTrevally">Giant Trevally</option>
+                        <option value="Humans">Humans</option>
+                        <option value="SaltWaterCrocodile">Salt Water Crocodile</option>
+                        <option value="Wobblegong">Wobblegong</option>
+                        <option value="ZebraFish">Zebra Fish</option>
+                        <option value="HarborSeal">Harbor Seal</option>
+                    </select>
+                    <select id="organism2">
+                        <option value="WhaleShark">Whale Shark</option>
+                        <option value="SandbarShark">Sandbar Shark</option>
+                        <option value="BlacktipReefShark">Blacktip Reef Shark</option>
+                        <option value="GiantGrouper">Giant Grouper</option>
+                        <option value="GiantTrevally">Giant Trevally</option>
+                        <option value="Humans">Humans</option>
+                        <option value="SaltWaterCrocodile">Salt Water Crocodile</option>
+                        <option value="Wobblegong">Wobblegong</option>
+                        <option value="ZebraFish">Zebra Fish</option>
+                        <option value="HarborSeal">Harbor Seal</option>
+                    </select>
+                    <select id="organism3">
+                        <option value="WhaleShark">Whale Shark</option>
+                        <option value="SandbarShark">Sandbar Shark</option>
+                        <option value="BlacktipReefShark">Blacktip Reef Shark</option>
+                        <option value="GiantGrouper">Giant Grouper</option>
+                        <option value="GiantTrevally">Giant Trevally</option>
+                        <option value="Humans">Humans</option>
+                        <option value="SaltWaterCrocodile">Salt Water Crocodile</option>
+                        <option value="Wobblegong">Wobblegong</option>
+                        <option value="ZebraFish">Zebra Fish</option>
+                        <option value="HarborSeal">Harbor Seal</option>
+                    </select>
+                    <select id="organism4">
+                        <option value="WhaleShark">Whale Shark</option>
+                        <option value="SandbarShark">Sandbar Shark</option>
+                        <option value="BlacktipReefShark">Blacktip Reef Shark</option>
+                        <option value="GiantGrouper">Giant Grouper</option>
+                        <option value="GiantTrevally">Giant Trevally</option>
+                        <option value="Humans">Humans</option>
+                        <option value="SaltWaterCrocodile">Salt Water Crocodile</option>
+                        <option value="Wobblegong">Wobblegong</option>
+                        <option value="ZebraFish">Zebra Fish</option>
+                        <option value="HarborSeal">Harbor Seal</option>
+                    </select>
+                    <button onclick="setUpPhylogram()">New Phylo</button>
+                </div>
             </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
+        </div> <!-- /.container -->
     </nav>
 
     <!-- Page Content -->
     <div class="container">
 
         <div class="row">
-            <div id="treeViz"></div>   
+            <div class="col-12" id="treeViz"> </div>
         </div>
-        <!-- /.row -->
+        <div class="row">
+            <div class="col-12" id="gene-network"> </div>
+        </div>
 
     </div>
-    <!-- /.container -->
 
+    <!-- floating div for the popup for hover -->
+    <div id='node-info' class='gia-popup'></div>
+
+    <!-- latest jquery -->
     <script src="js/jquery-1.11.0.js"></script>
 
+    <!-- jQuery-tmpl -->
+    <script src="js/jquery.tmpl.min.js"></script>
+
+    <!-- latest bootstrap.js -->
     <script src="js/bootstrap.min.js"></script>
+
+    <!-- latest d3 javascript -->
+    <script src="js/d3.min.js" charset="utf-8"></script>
+
+    <!-- latest d3 phylogram javascript -->
+    <script src="js/d3.phylogram.js" charset="utf-8"></script>
+
+    <!-- latest d3 javascript -->
+    <script src="js/newick.js" charset="utf-8"></script>
+
+    <!-- main javascript for the website -->
+    <script src="js/main.js"></script>
+
+    <script id="geneTemplate" type="text/x-jquery-tmpl">
+		<div id='node-name'>${name}</div>
+		<div class='node-topic' id='node-species-info'>
+			<div class='node-label'>Units sold</div>
+			<div class='node-data-color' style='background-color: ${color};'></div>
+			<div class='node-data-short'>${sales}</div>
+		</div>
+		<div class='node-topic' id='node-gene-info'>
+			<div class='node-label'>Gene Name</div>
+			<div class='node-data'>${geneName}</div>
+		</div>
+		<div class='node-topic' id='node-gene-expression'>
+			<div class='node-label'>Gene Expression</div>
+			<div class='node-data'></div>
+		</div>
+		<div class='node-topic' id='node-gene-translation'>
+			<div class='node-label'>Gene Translation</div>
+			<div class='node-data'>${translate}</div>
+		</div>
+	</script>
 
 </body>
 
