@@ -89,15 +89,13 @@ if (!d3) { throw "d3 wasn't included!"};
   
   
   d3.phylogram.build = function(selector, nodes, options) {
-    //d3.selectAll("svg").remove();
+    d3.select(".phyloContainer").remove();
     options = options || {}
     var w = options.width || d3.select(selector).style('width') || d3.select(selector).attr('width'),
         h = options.height || d3.select(selector).style('height') || d3.select(selector).attr('height'),
         w = parseInt(w),
         h = parseInt(h);
-        w = 900;
-        h=650;
-
+        
     var tree = options.tree || d3.layout.cluster()
       .size([h, w])
       .sort(function(node) { return node.children ? node.children.length : -1; })
@@ -106,6 +104,7 @@ if (!d3) { throw "d3 wasn't included!"};
       });
     var diagonal = options.diagonal || d3.phylogram.rightAngleDiagonal();
     var vis = options.vis || d3.select(selector).append("svg:svg")
+        .attr("class","phyloContainer")
         .attr("width", w + 300)
         .attr("height", h + 30)
       .append("svg:g")

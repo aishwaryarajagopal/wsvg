@@ -33,22 +33,11 @@
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<div class="row" style="width:100%;" id="containingRow">
+<div class="col-md-12" id="mainContent">
                 <div id="selection bar" align="center">
                     <select id="organism1">
+                        <option value="--">Pick one...</option>
                         <option value="WhaleShark">Whale Shark</option>
                         <option value="SandbarShark">Sandbar Shark</option>
                         <option value="BlacktipReefShark">Blacktip Reef Shark</option>
@@ -61,6 +50,7 @@
                         <option value="HarborSeal">Harbor Seal</option>
                     </select>
                     <select id="organism2">
+                        <option value="--">Pick one...</option>
                         <option value="WhaleShark">Whale Shark</option>
                         <option value="SandbarShark">Sandbar Shark</option>
                         <option value="BlacktipReefShark">Blacktip Reef Shark</option>
@@ -73,6 +63,7 @@
                         <option value="HarborSeal">Harbor Seal</option>
                     </select>
                     <select id="organism3">
+                        <option value="--">--</option>
                         <option value="WhaleShark">Whale Shark</option>
                         <option value="SandbarShark">Sandbar Shark</option>
                         <option value="BlacktipReefShark">Blacktip Reef Shark</option>
@@ -85,6 +76,7 @@
                         <option value="HarborSeal">Harbor Seal</option>
                     </select>
                     <select id="organism4">
+                        <option value="--">--</option>
                         <option value="WhaleShark">Whale Shark</option>
                         <option value="SandbarShark">Sandbar Shark</option>
                         <option value="BlacktipReefShark">Blacktip Reef Shark</option>
@@ -96,25 +88,18 @@
                         <option value="ZebraFish">Zebra Fish</option>
                         <option value="HarborSeal">Harbor Seal</option>
                     </select>
-                    <button onclick="setUpPhylogram()">New Phylo</button>
+                    <button onclick="updatePhyloLabels()">New Phylo</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="infoWikiShow" class="glyphicon glyphicon-circle-arrow-left" style="font-size:24px ;"></span><span id="infoWikiHide" class="glyphicon glyphicon-circle-arrow-right hide" style="font-size:24px ;"></span>
                 </div>
-            </div>
-        </div> <!-- /.container -->
-    </nav>
-
+            
+    
     <!-- Page Content -->
     <div class="container">
 
-        <div class="row">
             <div class="col-12" id="treeViz"> </div>
-        </div>
-        <div class="row">
             <div class="col-12" id="radialVis"> </div>
-        </div>
-
-    </div>
-
-    <!-- floating div for the popup for hover -->
+            <!-- floating div for the popup for hover -->
     <div id='node-info' class='gia-popup'></div>
 
     <!-- latest jquery -->
@@ -139,37 +124,101 @@
     <script src="js/radial.js"></script>
 
     <script id="geneTemplate" type="text/x-jquery-tmpl">
-		<div id='node-name'>${name}</div>
-		<div class='node-topic' id='node-species-info'>
-			<div class='node-label'>Units sold</div>
-			<div class='node-data-color' style='background-color: ${color};'></div>
-			<div class='node-data-short'>${sales}</div>
-		</div>
-		<div class='node-topic' id='node-gene-info'>
-			<div class='node-label'>Gene Name</div>
-			<div class='node-data'>${geneName}</div>
-		</div>
-		<div class='node-topic' id='node-gene-expression'>
-			<div class='node-label'>Gene Expression</div>
-			<div class='node-data'></div>
-		</div>
-		<div class='node-topic' id='node-gene-translation'>
-			<div class='node-label'>Gene Translation</div>
-			<div class='node-data'>${translate}</div>
-		</div>
-	</script>
+        <div id='node-name'>${name}</div>
+        <div class='node-topic' id='node-species-info'>
+            <div class='node-label'>Units sold</div>
+            <div class='node-data-color' style='background-color: ${color};'></div>
+            <div class='node-data-short'>${sales}</div>
+        </div>
+        <div class='node-topic' id='node-gene-info'>
+            <div class='node-label'>Gene Name</div>
+            <div class='node-data'>${geneName}</div>
+        </div>
+        <div class='node-topic' id='node-gene-expression'>
+            <div class='node-label'>Gene Expression</div>
+            <div class='node-data'></div>
+        </div>
+        <div class='node-topic' id='node-gene-translation'>
+            <div class='node-label'>Gene Translation</div>
+            <div class='node-data'>${translate}</div>
+        </div>
+    </script>
+    </div>
+    </div><!--left col end-->
+<div id="infoWiki" class="col-md-4 no-float hide" style="height:100%;width=100%; background-color:gray;">
+    <div class="panel-group" id="accordion1">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title" align="center">
+        <a  data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          <b>Phylo Tree</b>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+          <p>Phylo Tree</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title" align="center">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          <b>Radial Viz</b>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <b>Radial Viz</b>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title" align="center">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          <b>Compare Map</b>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <b>Compare Map</b>
+      </div>
+    </div>
+  </div>
+</div><!--end of accordion1-->
+</div><!-- right col end-->
+    
+</div>   <!--main row end-->
+<script type="text/javascript">
+    $('#infoWikiShow').click(function (e) {
+    //$("#panelContent").addClass("hide");
+    $("#infoWiki").removeClass("hide");
+    $("#mainContent").removeClass("col-md-12");
+    $("#mainContent").addClass("col-md-8");
 
+    $("#infoWikiShow").addClass("hide");
+    $("#infoWikiHide").removeClass("hide");
+})
+
+    $('#infoWikiHide').click(function (e) {
+    //$("#panelContent").addClass("hide");
+    $("#infoWiki").addClass("hide");
+    $("#mainContent").removeClass("col-md-8");
+    $("#mainContent").addClass("col-md-12");
+
+    $("#infoWikiHide").addClass("hide");  
+    $("#infoWikiShow").removeClass("hide");  
+
+})
+</script>
 </body>
 
 <script type="text/javascript">
 //PhyloTree Viz start
-function setUpPhylogram(){
-selectedList.push($("#organism1 option:selected").text());
-selectedList.push($("#organism2 option:selected").text());
-selectedList.push($("#organism3 option:selected").text());
-selectedList.push($("#organism4 option:selected").text());
-//console.log("selected list: "+selectedList);
-
 var myNewick = Newick.parse("(((((Blacktip Reef Shark:0.03585079,Sandbar Shark:0.03817814):0.06951782,(Whale Shark:0.08480993,Wobblegong:0.08552503):0.03996305):0.10105021,(Zebra Fish:0.18717747,(Giant Trevally:0.12005668,Giant Grouper:0.12993306):0.06658514):0.04722950):0.07006108,(Harbor Seal:0.15013151,Humans:0.17840333):0.12409540):0.00351495,Salt Water Crocodile:0.31732372);")
 
 
@@ -184,9 +233,28 @@ var myNewick = Newick.parse("(((((Blacktip Reef Shark:0.03585079,Sandbar Shark:0
         }
         buildNewickNodes(myNewick)
 
+$(document).ready(function(){
+selectedList.push($("#organism1 option:selected").text());
+selectedList.push($("#organism2 option:selected").text());
+selectedList.push($("#organism3 option:selected").text());
+selectedList.push($("#organism4 option:selected").text());
+//console.log("selected list: "+selectedList);
+
 d3.phylogram.build('#treeViz', myNewick, {
-          width: 300,
-          height: 400
+          //width: 700,
+          height: 380
+        });
+});
+function updatePhyloLabels(){
+   selectedList.push($("#organism1 option:selected").text());
+selectedList.push($("#organism2 option:selected").text());
+selectedList.push($("#organism3 option:selected").text());
+selectedList.push($("#organism4 option:selected").text());
+//console.log("selected list: "+selectedList);
+
+d3.phylogram.build('#treeViz', myNewick, {
+          //width: 700,
+          height: 380
         });
 }
 //PhyloTree Viz end
