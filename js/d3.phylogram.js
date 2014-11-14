@@ -1,4 +1,4 @@
-var selectedList = [];
+var selectedList=[];
 
 function listContainsEntryFor(organism){
   for(var i = 0 ; i<selectedList.length;i++){
