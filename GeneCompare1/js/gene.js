@@ -1,20 +1,51 @@
 	var margin = {top: 40, right: 40, bottom: 30, left: 140},
-    width = 1000 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
-/*function init()
+    width = 1240 
+    height = 410 
+function init3()
 {
-var filenames=["BlacktipReefShark/ATP6.fa","SwordFish/ATP6.fa","TigerShark/ND6.fa"];
-geneCompare(filenames);
-} */
-	
-function geneCompare(filenames)
+var geneValues=[{speciesName:"BlacktipReefShark",geneName:"ATP6",sequence:"ATGATTATAAGCTTCTTTGATCAATTCTTAAGCCCATCACTTATTGGAATCCCCCTTATTGCCCTAGCAATTTTAATTCCATGATTAACCTTTCCAACCCCAACTAATCGATGACTAAATAACCGACTAATCACCCTCCAAGGGTGATTTATTAATCGTTTTGTTTATCAACTTATACAACCAATTAATCTTGGAGGACATAAATGAGCTATACTACTAACAGCCCTAATACTATTTCTAATTACCATTAACCTTTTAGGCCTTCTTCCGTATACATTTACTCCTACAACACAACTTTCTCTAAATATAGCATTTGCCCTCCCACTATGACTTACAACTGTATTAATTGGTATATTAAACCAACCTACAATTACATTAGGCCACCTTCTTCCAGAAGGAACACCAACTCCTTTAATTCCAATCCTTATTATTATCGAAACTATTAGCCTATTTATTCGACCATTAGCCCTAGGGGTCCGACTAACTGCCAATTTAACAGCAGGTCACCTTCTAATACAACTAATTGCCACTGCAGCATTTGTTCTCTTGACCATCATACCAACCGTAGCCTTATTAACTTCTACAATTCTATTCTTATTAACAATCCTAGAAGTAGCTGTAGCAATAATCCAAGCATATGTATTTGTTCTCCTACTAAGCTTATACCTACAAGAAAACGTATAA"}
+				,{speciesName:"Human",geneName:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}
+				,{speciesName:"TigerShark",geneName:"ND3",sequence:"ATGAACCTCATCATATCATCAGTCGTGGCTACGGCCCTGGTTTCCCTAATACTCGCTTTAATTGCATTTTGATTACCATTACTTAACCCAGATAATGAAAAATTATCTCCTTATGAGTGTGGCTTTGACCCACTAGGAAATGCTCGCCTCCCATTTTCCTTACGTTTCTTCTTAGTGGCTATCTTATTTCTTTTATTTGACTTAGAAATTGCCCTCTTATTACCACTACCTTGAGGAAATCAATCATTAACACCACTCTCCACACTTTTTTGAGCAACAATTATTTTAATCTTACTCATCTTGGGTCTTATCTATGAGTGATCCCAAGGAGGACTTGAATGAGCAGAAT"}];
+geneCompare(geneValues);
+} 
+function init2()
+{
+var geneValues=[{speciesName:"BlacktipReefShark",geneName:"ATP6",sequence:"ATGATTATAAGCTTCTTTGATCAATTCTTAAGCCCATCACTTATTGGAATCCCCCTTATTGCCCTAGCAATTTTAATTCCATGATTAACCTTTCCAACCCCAACTAATCGATGACTAAATAACCGACTAATCACCCTCCAAGGGTGATTTATTAATCGTTTTGTTTATCAACTTATACAACCAATTAATCTTGGAGGACATAAATGAGCTATACTACTAACAGCCCTAATACTATTTCTAATTACCATTAACCTTTTAGGCCTTCTTCCGTATACATTTACTCCTACAACACAACTTTCTCTAAATATAGCATTTGCCCTCCCACTATGACTTACAACTGTATTAATTGGTATATTAAACCAACCTACAATTACATTAGGCCACCTTCTTCCAGAAGGAACACCAACTCCTTTAATTCCAATCCTTATTATTATCGAAACTATTAGCCTATTTATTCGACCATTAGCCCTAGGGGTCCGACTAACTGCCAATTTAACAGCAGGTCACCTTCTAATACAACTAATTGCCACTGCAGCATTTGTTCTCTTGACCATCATACCAACCGTAGCCTTATTAACTTCTACAATTCTATTCTTATTAACAATCCTAGAAGTAGCTGTAGCAATAATCCAAGCATATGTATTTGTTCTCCTACTAAGCTTATACCTACAAGAAAACGTATAA"}
+				,{speciesName:"Human",geneName:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}];
+geneCompare(geneValues);
+} 
+function init4()
+{
+var geneValues=[{speciesName:"BlacktipReefShark",geneName:"ATP6",sequence:"ATGATTATAAGCTTCTTTGATCAATTCTTAAGCCCATCACTTATTGGAATCCCCCTTATTGCCCTAGCAATTTTAATTCCATGATTAACCTTTCCAACCCCAACTAATCGATGACTAAATAACCGACTAATCACCCTCCAAGGGTGATTTATTAATCGTTTTGTTTATCAACTTATACAACCAATTAATCTTGGAGGACATAAATGAGCTATACTACTAACAGCCCTAATACTATTTCTAATTACCATTAACCTTTTAGGCCTTCTTCCGTATACATTTACTCCTACAACACAACTTTCTCTAAATATAGCATTTGCCCTCCCACTATGACTTACAACTGTATTAATTGGTATATTAAACCAACCTACAATTACATTAGGCCACCTTCTTCCAGAAGGAACACCAACTCCTTTAATTCCAATCCTTATTATTATCGAAACTATTAGCCTATTTATTCGACCATTAGCCCTAGGGGTCCGACTAACTGCCAATTTAACAGCAGGTCACCTTCTAATACAACTAATTGCCACTGCAGCATTTGTTCTCTTGACCATCATACCAACCGTAGCCTTATTAACTTCTACAATTCTATTCTTATTAACAATCCTAGAAGTAGCTGTAGCAATAATCCAAGCATATGTATTTGTTCTCCTACTAAGCTTATACCTACAAGAAAACGTATAA"}
+				,{speciesName:"Human",geneName:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}
+				,{speciesName:"Human",geneName:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}
+				,{speciesName:"Human",geneName:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}];
+geneCompare(geneValues);
+} 
+function init5()
+{
+var geneValues=[{speciesName:"BlacktipReefShark",geneName:"ATP6",sequence:"ATGATTATAAGCTTCTTTGATCAATTCTTAAGCCCATCACTTATTGGAATCCCCCTTATTGCCCTAGCAATTTTAATTCCATGATTAACCTTTCCAACCCCAACTAATCGATGACTAAATAACCGACTAATCACCCTCCAAGGGTGATTTATTAATCGTTTTGTTTATCAACTTATACAACCAATTAATCTTGGAGGACATAAATGAGCTATACTACTAACAGCCCTAATACTATTTCTAATTACCATTAACCTTTTAGGCCTTCTTCCGTATACATTTACTCCTACAACACAACTTTCTCTAAATATAGCATTTGCCCTCCCACTATGACTTACAACTGTATTAATTGGTATATTAAACCAACCTACAATTACATTAGGCCACCTTCTTCCAGAAGGAACACCAACTCCTTTAATTCCAATCCTTATTATTATCGAAACTATTAGCCTATTTATTCGACCATTAGCCCTAGGGGTCCGACTAACTGCCAATTTAACAGCAGGTCACCTTCTAATACAACTAATTGCCACTGCAGCATTTGTTCTCTTGACCATCATACCAACCGTAGCCTTATTAACTTCTACAATTCTATTCTTATTAACAATCCTAGAAGTAGCTGTAGCAATAATCCAAGCATATGTATTTGTTCTCCTACTAAGCTTATACCTACAAGAAAACGTATAA"}
+				,{speciesName:"Human",geneName:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}
+				,{speciesName:"Human",geneName:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}
+				,{speciesName:"BlacktipReefShark",geneName:"ATP6",sequence:"ATGATTATAAGCTTCTTTGATCAATTCTTAAGCCCATCACTTATTGGAATCCCCCTTATTGCCCTAGCAATTTTAATTCCATGATTAACCTTTCCAACCCCAACTAATCGATGACTAAATAACCGACTAATCACCCTCCAAGGGTGATTTATTAATCGTTTTGTTTATCAACTTATACAACCAATTAATCTTGGAGGACATAAATGAGCTATACTACTAACAGCCCTAATACTATTTCTAATTACCATTAACCTTTTAGGCCTTCTTCCGTATACATTTACTCCTACAACACAACTTTCTCTAAATATAGCATTTGCCCTCCCACTATGACTTACAACTGTATTAATTGGTATATTAAACCAACCTACAATTACATTAGGCCACCTTCTTCCAGAAGGAACACCAACTCCTTTAATTCCAATCCTTATTATTATCGAAACTATTAGCCTATTTATTCGACCATTAGCCCTAGGGGTCCGACTAACTGCCAATTTAACAGCAGGTCACCTTCTAATACAACTAATTGCCACTGCAGCATTTGTTCTCTTGACCATCATACCAACCGTAGCCTTATTAACTTCTACAATTCTATTCTTATTAACAATCCTAGAAGTAGCTGTAGCAATAATCCAAGCATATGTATTTGTTCTCCTACTAAGCTTATACCTACAAGAAAACGTATAA"}];
+geneCompare(geneValues);
+} 
+function geneCompare(geneValues)
 {
 	var geneData;
 	var zVal='';
 	var genes=[];
 	var speciesName=[];
 	var geneName=[];
-	for(var p=0;p<filenames.length;p++)
+	for(var k=0;k<geneValues.length;k++)
+	{
+		speciesName.push(geneValues[k].speciesName);
+		geneName.push(geneValues[k].geneName);
+		genes.push(geneValues[k].sequence);
+	}
+	geneData = randomData(width, height,genes,speciesName,geneName);
+	generateVis();
+/*	for(var p=0;p<filenames.length;p++)
 	{
 	var str=filenames[p];
 	var res=str.split("/");
@@ -51,13 +82,13 @@ function processData(jsondata)
 	{
 		console.log(genes[f]);
 	}
-	geneData = randomData(width, height,genes,speciesName,geneName);
-	generateVis();
-}
+	
+} */
 
 function generateVis()
 {
 	//console.log("geneData "+geneData);
+	d3.select(".vis").remove();
 	var x = d3.scale.linear()
     .domain([0, width])
     .range([0, width]);
@@ -73,13 +104,13 @@ function generateVis()
                     .attr("class", "vis")
 					.append("g")
 					.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-					.call(zoom);
+					.call(zoom);	
 	
     var row = svgCompare.selectAll(".row")
                   .data(geneData)
                 .enter().append("svg:g")
                   .attr("class", "row");
-
+	
     var col = row.selectAll(".cell")
                  .data(function (d) { return d; })
                  .enter().append("svg:rect")
@@ -105,8 +136,8 @@ function generateVis()
                  .data(function (d) { return d; })
                 .enter().append("svg:rect")
                  .attr("class", "cell")
-                 .attr("x", function(d,index) { 
-				 return x(index)+20;
+                 .attr("x", function(d,index) {
+				  return x(index)+20;
 				 })
                  .attr("y", function(d) { return d.y; })
                  .attr("width", function(d) { return x(1)-x(0); })
@@ -115,7 +146,7 @@ function generateVis()
 				 .on("mouseover",function(d,index){
 				 console.log("inside mouse hover");
 				 	row1.selectAll('.cell')				
-					.style("fill",function(d){
+					/*.style("fill",function(d){
 					if(d.count==index)
 					{
 					console.log("inside match");
@@ -124,6 +155,18 @@ function generateVis()
 					else
 					{
 					return d.color;
+					}
+					}) */
+					.attr("stroke",function(d){	
+					if((d.count==index)&&(d.value!='Z'))
+					{
+					return "#E65C00";
+					}
+					})
+					.attr("stroke-width",function(d){
+					if((d.count==index)&&(d.value!='Z'))
+					{
+					return 4;
 					}
 					});
 					
@@ -134,7 +177,7 @@ function generateVis()
 	 var text = row1.selectAll(".label")
         .data(function(d) {return d;})
       .enter().append("svg:text")
-        .attr("x", function(d,index) { return x(index)+20 +(x(1)-x(0))/2 })
+        .attr("x", function(d,index) { return x(index)+20+(x(1)-x(0))/2 })
         .attr("y", function(d) { return d.y + d.height/2 })
         .attr("text-anchor","middle")
         .attr("font-size", "8")
@@ -149,7 +192,7 @@ function generateVis()
 	}
 }
 
-function randomData(gridWidth, gridHeight,genes,species,geneName)
+function randomData(gridWidth, gridHeight,genes,species,gene)
 {
 	var genesLength=[];
 	for(var j=0;j<genes.length;j++)
@@ -171,6 +214,7 @@ function randomData(gridWidth, gridHeight,genes,species,geneName)
     var ypos = startY;
     var newValue = '';
 	var speciesName='';
+	var geneName='';
     var count = 0;
 	var innerCount=0;
 	var genesNew=[];
@@ -191,6 +235,7 @@ function randomData(gridWidth, gridHeight,genes,species,geneName)
 	for (var index_a = 0; index_a < genesNew.length; index_a++)
     {
 		speciesName=species[index_a];
+		geneName=gene[index_a];
 		innerCount=0;
         data.push(new Array());
 		geneSeq=genesNew[index_a];
@@ -200,9 +245,9 @@ function randomData(gridWidth, gridHeight,genes,species,geneName)
 			if(count==0)
 			{
 			if(newValue!="Z")
-				var colorValue="#FFFFDB";
+				var colorValue="#FFFFEB";
 			else	
-				var colorValue="#999966";
+				var colorValue="#C5C5C5";
 			}
 			else{
 			if(geneFirst[index_b]=='A'&&newValue=='C')
@@ -255,11 +300,11 @@ function randomData(gridWidth, gridHeight,genes,species,geneName)
 			}
 			if((geneFirst[index_b]==newValue)&&(newValue!='Z')&&(geneFirst[index_b]!='Z'))
 			{
-			var colorValue="#FFFFDB";
+			var colorValue="#FFFFEB";
 			}
 			if(newValue=='Z')
 			{
-			var colorValue="#999966";
+			var colorValue="#C5C5C5";
 			}
 			if(geneFirst[index_b]=='Z'&&newValue=='A')
 			{
@@ -287,7 +332,8 @@ function randomData(gridWidth, gridHeight,genes,species,geneName)
                                 y: ypos,
                                 color:colorValue,
 								count:innerCount,
-								name:speciesName
+								name:speciesName,
+								gene:geneName
                             });
 			
             xpos += stepX;
