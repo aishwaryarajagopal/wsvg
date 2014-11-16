@@ -59,7 +59,9 @@ var line = d3.svg.line.radial()
 
 // Max values to set so I can adjust the radial view
 var maxGeneLength = 0,
-    gradientCounter = 0;
+    gradientCounter = 0,
+    linkEndCounter = 0,
+    linkStartCounter = 0;
 
 // On document ready, process the json file
 $(document).ready(function () {
@@ -109,7 +111,7 @@ function processGenomeData(data) {
         });
     });
 
-    var selectSpecies = [species[9], species[6], species[2], species[3]];
+    var selectSpecies = [species[2],species[4], species[7],  species[1]];
     drawGeneChart(selectSpecies);
 
 }
@@ -145,6 +147,7 @@ function drawGeneChart(selectedSpecies){
         })
         .on("mouseover", showGeneConnections)
         .on("mouseout", hideGeneConnections)
+        .on("click", showGeneLightBox);
 
     radialSvg.selectAll(".node")
         .data(nodes.filter(function(n) { return n.depth == 2; }))
@@ -169,13 +172,15 @@ function drawGeneChart(selectedSpecies){
         })
         .style('fill', '#394B9F')
         .on("mouseover", showGeneConnections)
-        .on("mouseout", hideGeneConnections);
+        .on("mouseout", hideGeneConnections)
+        .on("click", showGeneLightBox);
 
     //$(".node").mousemove(setGenePopupPosition);
     //$(".node-dot").mousemove(setGenePopupPosition);
 
     // Looks into all of the selected species - and finds the ones that are now nodes
-    // TODO this needs to be changed to only have targets that are in the selecteSpecies array
+    // TODO this needs to be changed to only have targets that are in the selectedSpecies array
+    // Only want links from the first to the next, then from the second to the third, then from the third to fourth
     for(var s = 0; s < 4; s++){
         geneMap.children.push(selectedSpecies[s]);
         for(var l = 0; l < selectedSpecies[s].links.length; l++){
@@ -185,11 +190,13 @@ function drawGeneChart(selectedSpecies){
         }
     }
 
+
+
     radialSvg.selectAll(".links")
         .data(geneBundle(mergedLinks))
         .enter().append("path")
         .attr("class", function(d){
-            var linkClass = 'links link-' + d[0]['className'] + ' link-' + d[0]['className'];
+            var linkClass = 'links link-' + d[0]['className'] + ' link-' + d[4]['className'];
             return linkClass
         })
         .attr("id", function(d){
@@ -217,7 +224,6 @@ function getGeneClassName(species, gene){
 }
 
 function getGeneColor(species, length){
-    console.log(species);
 
     // TODO change color intensity based on connection?
     return colorMap[species];
@@ -233,16 +239,16 @@ function showGeneConnections(d) {
         .classed('circle-text-dim', false);
 
     radialSvg.selectAll('.node-dot')
-        .style("opacity", .05)
+        .style("opacity", .05);
 
     radialSvg.selectAll('path.links')
-        .style("stroke-opacity", .01)
+        .style("opacity", .01);
 
     radialSvg.selectAll('path.link-' + d.className)
-        .style("stroke-opacity",1)
+        .style("opacity",1);
 
     radialSvg.selectAll('.nodedot-' + d.className)
-        .style("opacity",1)
+        .style("opacity",1);
 
     d.connectedNodes.forEach(function(n){
         radialSvg.select('#nodetext-' + n.className)
@@ -291,10 +297,21 @@ function showGeneConnections(d) {
 
 }
 
+function showGeneLightBox(d) {
+    var genesToCompare = [];
+    var g = 0;
+    d.connectedNodes.forEach(function(n){
+        if(n.parent) {
+            genesToCompare[g] = {speciesName: n.speciesClass, geneName: n.name, sequence: n.sequence};
+            g++;
+        }
+    });
+}
+
 function hideGeneConnections(d) {
     //$("#node-info").hide();
     radialSvg.selectAll('path.links')
-        .style("stroke-opacity", 1);
+        .style("opacity", 1);
 
     radialSvg.selectAll('.circle-text')
         .classed('circle-text-dim', false)
