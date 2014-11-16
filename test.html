@@ -242,7 +242,10 @@
 <script type="text/javascript">
 //PhyloTree Viz start
 
-var myNewick = Newick.parse("(((((Blacktip Reef Shark:0.03585079,Sandbar Shark:0.03817814):0.06951782,(Whale Shark:0.08480993,Wobblegong:0.08552503):0.03996305):0.10105021,(Zebra Fish:0.18717747,(Giant Trevally:0.12005668,Giant Grouper:0.12993306):0.06658514):0.04722950):0.07006108,(Harbor Seal:0.15013151,Humans:0.17840333):0.12409540):0.00351495,Salt Water Crocodile:0.31732372);")
+
+
+$(document).ready(function(){
+        var myNewick = Newick.parse("(((((Blacktip Reef Shark:0.03585079,Sandbar Shark:0.03817814):0.06951782,(Whale Shark:0.08480993,Wobblegong:0.08552503):0.03996305):0.10105021,(Zebra Fish:0.18717747,(Giant Trevally:0.12005668,Giant Grouper:0.12993306):0.06658514):0.04722950):0.07006108,(Harbor Seal:0.15013151,Humans:0.17840333):0.12409540):0.00351495,Salt Water Crocodile:0.31732372);")
 
 
         var newickNodes = []
@@ -255,14 +258,26 @@ var myNewick = Newick.parse("(((((Blacktip Reef Shark:0.03585079,Sandbar Shark:0
           }
         }
         buildNewickNodes(myNewick)
-
-$(document).ready(function(){
 d3.phylogram.build('#treeViz', myNewick, {
           //width: 700,
-          height: 380
+          height: 500
         });
 });
+
 function updatePhyloLabels(){
+    var myNewick = Newick.parse("(((((Blacktip Reef Shark:0.03585079,Sandbar Shark:0.03817814):0.06951782,(Whale Shark:0.08480993,Wobblegong:0.08552503):0.03996305):0.10105021,(Zebra Fish:0.18717747,(Giant Trevally:0.12005668,Giant Grouper:0.12993306):0.06658514):0.04722950):0.07006108,(Harbor Seal:0.15013151,Humans:0.17840333):0.12409540):0.00351495,Salt Water Crocodile:0.31732372);")
+
+
+        var newickNodes = []
+        function buildNewickNodes(node, callback) {
+          newickNodes.push(node)
+          if (node.branchset) {
+            for (var i=0; i < node.branchset.length; i++) {
+              buildNewickNodes(node.branchset[i])
+            }
+          }
+        }
+        buildNewickNodes(myNewick)
 selectedList=[];
 selectedList.push($("#organism1 option:selected").text());
 selectedList.push($("#organism2 option:selected").text());
@@ -272,7 +287,7 @@ selectedList.push($("#organism4 option:selected").text());
 
 d3.phylogram.build('#treeViz', myNewick, {
           //width: 700,
-          height: 380
+          height: 500
         });
 }
 //PhyloTree Viz end
