@@ -297,7 +297,7 @@ function showGeneConnections(d) {
 
 }
 
-function showGeneLightBox(d) {
+function showGeneComparison(d) {
     var genesToCompare = [];
     var g = 0;
     d.connectedNodes.forEach(function(n){
