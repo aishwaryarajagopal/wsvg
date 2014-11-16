@@ -147,7 +147,7 @@ function drawGeneChart(selectedSpecies){
         })
         .on("mouseover", showGeneConnections)
         .on("mouseout", hideGeneConnections)
-        .on("click", showGeneLightBox);
+        .on("click", showGeneComparison);
 
     radialSvg.selectAll(".node")
         .data(nodes.filter(function(n) { return n.depth == 2; }))
@@ -173,7 +173,7 @@ function drawGeneChart(selectedSpecies){
         .style('fill', '#394B9F')
         .on("mouseover", showGeneConnections)
         .on("mouseout", hideGeneConnections)
-        .on("click", showGeneLightBox);
+        .on("click", showGeneComparison);
 
     //$(".node").mousemove(setGenePopupPosition);
     //$(".node-dot").mousemove(setGenePopupPosition);
