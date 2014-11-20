@@ -89,7 +89,7 @@ if (!d3) { throw "d3 wasn't included!"};
   
   
   d3.phylogram.build = function(selector, nodes, options) {
-    d3.select(".phyloContainer").remove();
+    d3.select("#phyloContainer").remove();
     options = options || {}
     var w = options.width || d3.select(selector).style('width') || d3.select(selector).attr('width'),
         h = options.height || d3.select(selector).style('height') || d3.select(selector).attr('height'),
@@ -104,7 +104,7 @@ if (!d3) { throw "d3 wasn't included!"};
       });
     var diagonal = options.diagonal || d3.phylogram.rightAngleDiagonal();
     var vis = options.vis || d3.select(selector).append("svg:svg")
-        .attr("class","phyloContainer")
+        .attr("id","phyloContainer")
         .attr("width", w + 300)
         .attr("height", h + 30)
       .append("svg:g")
@@ -171,8 +171,15 @@ if (!d3) { throw "d3 wasn't included!"};
         .attr('fill', 'black')
         .attr('style', function(d){
           if(listContainsEntryFor(d.name)==1){
-            return "font-weight:bold;"
+            return "font-weight:bold; fill:red;"
           }
+        })
+        .style("opacity", function(d) {
+          if(listContainsEntryFor(d.name)!=1){
+            return 0.5;
+          }else{
+            return 1;
+          } 
         })
         .text(function(d) { return d.name;});
 
@@ -185,8 +192,9 @@ if (!d3) { throw "d3 wasn't included!"};
           .attr('fill', '#000000')
         .text(function(d) { return d.length; });
         
-        /*.append("svg:image")
-      .attr("xlink:href", "test.jpg")
+    /*    vis.selectAll('g.leaf.node')
+        .append("svg:image")
+      .attr("xlink:href","icons/whaleshark.jpg")
       .attr("x", -8)
       .attr("y", -8)
       .attr("width", 16)

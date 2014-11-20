@@ -37,8 +37,16 @@ for d in allDirs:
 				ignoreFirst = 1
 				count = 0
 				seq = ""
+				st_ind = 0
+				gene_desc = ""
 				for line in allLines:
 					if ignoreFirst == 1:
+						st_ind = line[line.index(':')+1: line.index('-')]
+						try:
+							int(st_ind)
+						except ValueError:
+							st_ind = st_ind[1:]
+						gene_desc = (line[line.index(' ', line.index('-'))+1:]).strip()
 						ignoreFirst = 0
 						continue
 					if len(line) == 0:
@@ -48,7 +56,7 @@ for d in allDirs:
 				print(count)
 				print(seq)
 				length += count
-				genes.append({"name":f.replace(".fa","").upper(),"path":fastaPath,"sequence":seq,"length":count})
+				genes.append({"name":f.replace(".fa","").upper(),"path":fastaPath,"sequence":seq,"length":count,"startIndex":int(st_ind), "desc":gene_desc})
 		opt.append({"name":d,"path":dPath,"genes":genes, "length":length, "numGenes":len(genes)})
 	#f = open(sys.argv[1]+"/"+f,"r")
 	#allLines = f.readlines()
