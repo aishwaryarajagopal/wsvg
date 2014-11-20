@@ -12,7 +12,6 @@ function listContainsEntryFor(organism){
 
 if (!d3) { throw "d3 wasn't included!"};
 (function() {
-  console.log("selected list: "+selectedList);
   d3.phylogram = {}
   d3.phylogram.rightAngleDiagonal = function() {
     var projection = function(d) { return [d.y, d.x]; }
