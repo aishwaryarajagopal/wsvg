@@ -146,17 +146,12 @@ body {
     opacity: .6;
 }
 
-.node {
+.radnode {
     cursor: pointer;
 }
 
-.game-weapon-link {
-    stroke-width: 1px;
-    fill: none;
-}
-.game-topic-link {
-    stroke-width: 1px;
-    fill: none;
+.radnode-dot {
+    cursor: pointer;
 }
 
 .circle-text-dim {
@@ -261,7 +256,7 @@ body {
     float: left;
 }
 
-.gia-popup {
+.radial-popup {
     pointer-events: none;
     padding: 6px 6px 6px 6px;
     color: #333;
@@ -286,7 +281,6 @@ body {
     margin-top: 50px;
     padding-top: 20px;
 }
-
 
 .user-grid {
     width: 300px;
@@ -373,63 +367,4 @@ body {
 
 #circle-chart-container {
     position: relative;
-    background: url(../img/annotations.png) no-repeat 5px -70px;
 }
-
-
-#anchored-charts {
-    padding-top: 100px;
-    width: 200px;
-    position: absolute;
-}
-
-.anchored-chart {
-    float: left;
-    margin-bottom: 50px;
-}
-
-#chart-game-guns {
-    float: left;
-    width: 180px;
-}
-
-#chart-game-audience {
-    float: left;
-}
-
-#chart-violence {
-    width: 180px;
-    float: left;
-}
-
-
-.chart-detail {
-    position: absolute;
-    width: 100px;
-}
-
-.chart-detail p {
-    font-size: 11px;
-    line-height: 12px;
-}
-
-
-
-#intro-video {
-    width: 460px;
-    float: left;
-    height: 258px;
-    margin-left: 90px;
-}
-
-#intro-text {
-    margin-right: 20px;
-    margin-left: 20px;
-    width: 300px;
-    float: left;
-}
-#intro-text p {
-    text-align: left;
-
-}
-
