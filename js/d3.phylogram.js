@@ -50,10 +50,7 @@ if (!d3) { throw "d3 wasn't included!"};
         .attr("r", 4.5)
         .attr('stroke',  'yellowGreen')
         .attr('fill', 'greenYellow')
-        .attr('stroke-width', '2px')
-        .on('mouseover',function(d){
-          
-        });
+        .attr('stroke-width', '2px');
     
     /*vis.selectAll('g.root.node')
       .append('svg:circle')
