@@ -13,6 +13,9 @@
     <link href="css/guardian.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="http://pasteup.guim.co.uk/0.0.3/css/pasteup.min.css">
 
+    <script src='js/comparemap.js'></script>  
+    <link rel="stylesheet" type="text/css" href="css/tooltip.css">
+
     <!-- Custom CSS -->
     <style type="text/css">
       body {
@@ -109,6 +112,16 @@
             <button data-toggle="modal" data-target="#myModal">Lightbox</button>
             <div class="col-12" id="treeViz"> </div>
             <div class="col-12" id="radialVis"> </div>
+            <div class="col-12" id="compareViz"></div>
+            <!-- latest d3 javascript -->
+            <script src="js/d3.min.js" charset="utf-8"></script>
+            <script type="text/javascript">
+            var geneValues=[{speciesName:"BlacktipReefShark",geneName:"ATP6",sequence:"ATGATTATAAGCTTCTTTGATCAATTCTTAAGCCCATCACTTATTGGAATCCCCCTTATTGCCCTAGCAATTTTAATTCCATGATTAACCTTTCCAACCCCAACTAATCGATGACTAAATAACCGACTAATCACCCTCCAAGGGTGATTTATTAATCGTTTTGTTTATCAACTTATACAACCAATTAATCTTGGAGGACATAAATGAGCTATACTACTAACAGCCCTAATACTATTTCTAATTACCATTAACCTTTTAGGCCTTCTTCCGTATACATTTACTCCTACAACACAACTTTCTCTAAATATAGCATTTGCCCTCCCACTATGACTTACAACTGTATTAATTGGTATATTAAACCAACCTACAATTACATTAGGCCACCTTCTTCCAGAAGGAACACCAACTCCTTTAATTCCAATCCTTATTATTATCGAAACTATTAGCCTATTTATTCGACCATTAGCCCTAGGGGTCCGACTAACTGCCAATTTAACAGCAGGTCACCTTCTAATACAACTAATTGCCACTGCAGCATTTGTTCTCTTGACCATCATACCAACCGTAGCCTTATTAACTTCTACAATTCTATTCTTATTAACAATCCTAGAAGTAGCTGTAGCAATAATCCAAGCATATGTATTTGTTCTCCTACTAAGCTTATACCTACAAGAAAACGTATAA"}
+                ,{speciesName:"Human",geneName:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}
+                ,{speciesName:"Human",geneName:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}
+                ,{speciesName:"Human",geneName:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}];
+geneCompare(geneValues);
+</script>
 
             <!-- latest jquery -->
             <script src="js/jquery-1.11.0.js"></script>
@@ -119,8 +132,7 @@
             <!-- latest bootstrap.js -->
             <script src="js/bootstrap.min.js"></script>
 
-            <!-- latest d3 javascript -->
-            <script src="js/d3.min.js" charset="utf-8"></script>
+            
 
             <!-- latest d3 phylogram javascript -->
             <script src="js/d3.phylogram.js" charset="utf-8"></script>
