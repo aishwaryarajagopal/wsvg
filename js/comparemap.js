@@ -1,5 +1,5 @@
 	var margin = {top: 20, right: 60, bottom: 30, left: 20},
-    width = 960- margin.left - margin.right,
+    width = 800- margin.left - margin.right,
     height = 500 - margin.top - margin.bottom; 
 function init3()
 {
@@ -108,43 +108,48 @@ function generateVis()
 	var zoom = d3.behavior.zoom()
     .x(x)
     .scaleExtent([1,22])
-    .on("zoom", zoomed);  
+    .on("zoom", zoomed);
+
 	console.log(x(1)-x(0));
+
 	var tip =d3.select("body").append("div")   
                             .attr("class", "d3-tip")               
                             .style("opacity", 0);
 
     var svgLabel=d3.select("#compareViz").append("svg")
-   					.style("width", 300)
+   					.style("width", 140)
                     .style("height", height + margin.top + margin.bottom)
                     .style("float","left")
     				.attr("class","vislabel")
     				.append("g");
+
     var labelRect=svgLabel.selectAll(".labelname")
     				.data(labelData)
-    				.enter().append("svg:rect")
+    				.enter();
+
+    				labelRect.append("svg:rect")
     				.attr("class","cellLabel")
-    				.attr("x", 180)
+    				.attr("x", 10)
                  	.attr("y", function(d) { return d.yval; })
                  	.attr("rx", 20)	
                  	.attr("ry", 20)
-                 	.attr("width", 100)	
+                 	.attr("width", 110)	
                  	.attr("height", 20)
-                 	.style("fill","red")
-                 	.style("stroke","black")
+                 	.style("fill","#000066")
+                 	.style("stroke","#000066")
                  	.style("stroke-width",3)
                  	.style("opacity",0.5);
 
-   /* var textlabel=  labelRect.selectAll(".labeltext")
-        			.data(function(d) {return d;})
-      				.enter().append("svg:text")     
-        			.attr("x", 90)
-        			.attr("y", function(d) { return d.yval/2 })
+   var textlabel=  labelRect
+   					.append("svg:text")     
+        			.attr("x", 60)
+        			.attr("y", function(d) { return d.yval+15 })
         			.attr("text-anchor","middle")
-        			.attr("font-size", "10")
+        			.attr("font-size", "12")
         			.text(function(d) { 
+        			console.log("inside labeltext");
 					return d.labelVal;
-					}); */
+					}); 
 
                  	
     var svgCompare = d3.select('#compareViz').append("svg")
@@ -153,7 +158,8 @@ function generateVis()
                     .attr("class", "vis")
 					.append("g")
 					.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-					.call(zoom);	
+					.call(zoom)
+					.on("dblclick.zoom", null);	
 
    	
 
@@ -227,13 +233,13 @@ function generateVis()
                     if(d.rowCount==0)
                     {
                     	console.log("inside first row");
-                    	tip.html("<strong>Gene:</strong> <span style='color:red'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:red'>" + d.count + "</span><br><strong>Base Species:</strong> <span style='color:red'>" + d.name + "</span><br><strong>Base Nucleotide:</strong> <span style='color:red'>" + geneName + "</span>")
+                    	tip.html("<strong>Gene:</strong> <span style='color:#008AB8'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:#008AB8'>" + d.count + "</span><br><strong>Base Species:</strong> <span style='color:#008AB8'>" + d.name + "</span><br><strong>Base Nucleotide:</strong> <span style='color:#008AB8'>" + geneName + "</span>")
                        .style("left", (d3.event.pageX+20) + "px")     
                        .style("top", (d3.event.pageY - 120) + "px");
                     }  
                     else
                     {
-                    tip.html("<strong>Gene:</strong> <span style='color:red'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:red'>" + d.count + "</span><br><strong>Species:</strong> <span style='color:red'>" + d.name + "</span><br><strong>Nucleotide:</strong> <span style='color:red'>" + geneName + "</span><br><strong>Base Species:</strong> <span style='color:red'>" + d.baseSpecies + "</span><br><strong>Base Nucleotide:</strong> <span style='color:red'>" + basegeneName + "</span>")
+                    tip.html("<strong>Gene:</strong> <span style='color:#008AB8'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:#008AB8'>" + d.count + "</span><br><strong>Species:</strong> <span style='color:#008AB8'>" + d.name + "</span><br><strong>Nucleotide:</strong> <span style='color:#008AB8'>" + geneName + "</span><br><strong>Base Species:</strong> <span style='color:#008AB8'>" + d.baseSpecies + "</span><br><strong>Base Nucleotide:</strong> <span style='color:#008AB8'>" + basegeneName + "</span>")
                        .style("left", (d3.event.pageX+20) + "px")     
                        .style("top", (d3.event.pageY - 120) + "px");
                     }
@@ -334,13 +340,13 @@ function generateVis()
                     if(d.rowCount==0)
                     {
                     	console.log("inside first row");
-                    	tip.html("<strong>Gene:</strong> <span style='color:red'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:red'>" + d.count + "</span><br><strong>Base Species:</strong> <span style='color:red'>" + d.name + "</span><br><strong>Base Nucleotide:</strong> <span style='color:red'>" + geneName + "</span>")
+                    	tip.html("<strong>Gene:</strong> <span style='color:#008AB8'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:#008AB8'>" + d.count + "</span><br><strong>Base Species:</strong> <span style='color:#008AB8'>" + d.name + "</span><br><strong>Base Nucleotide:</strong> <span style='color:#008AB8'>" + geneName + "</span>")
                        .style("left", (d3.event.pageX+20) + "px")     
                        .style("top", (d3.event.pageY - 120) + "px");
                     }  
                     else
                     {
-                    tip.html("<strong>Gene:</strong> <span style='color:red'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:red'>" + d.count + "</span><br><strong>Species:</strong> <span style='color:red'>" + d.name + "</span><br><strong>Nucleotide:</strong> <span style='color:red'>" + geneName + "</span><br><strong>Base Species:</strong> <span style='color:red'>" + d.baseSpecies + "</span><br><strong>Base Nucleotide:</strong> <span style='color:red'>" + basegeneName + "</span>")
+                    tip.html("<strong>Gene:</strong> <span style='color:#008AB8'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:#008AB8'>" + d.count + "</span><br><strong>Species:</strong> <span style='color:#008AB8'>" + d.name + "</span><br><strong>Nucleotide:</strong> <span style='color:#008AB8'>" + geneName + "</span><br><strong>Base Species:</strong> <span style='color:#008AB8'>" + d.baseSpecies + "</span><br><strong>Base Nucleotide:</strong> <span style='color:#008AB8'>" + basegeneName + "</span>")
                        .style("left", (d3.event.pageX+20) + "px")     
                        .style("top", (d3.event.pageY - 120) + "px");
                     }
