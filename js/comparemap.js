@@ -152,17 +152,16 @@ function generateVis()
 					}); 
 
                  	
-    var svgCompare = d3.select('#compareViz').append("svg")
+    var svgCompare1 = d3.select('#compareViz').append("svg")
                     .style("width", width + margin.left + margin.right)
                     .style("height", height + margin.top + margin.bottom)
                     .attr("class", "vis")
-					.append("g")
-					.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-					.call(zoom)
+                    .call(zoom)
 					.on("dblclick.zoom", null);	
-
-   	
-
+					
+	var svgCompare= svgCompare1.append("g")
+					.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+					
 	
     var row = svgCompare.selectAll(".row")
                   .data(geneData)
