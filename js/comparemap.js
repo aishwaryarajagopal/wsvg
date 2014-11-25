@@ -372,7 +372,53 @@ function generateVis()
 		if(d.value!='Z')
 			return d.value;
 		else
-			return zVal;});
+			return zVal;})
+        .on("click",function(d){
+        	console.log("text click");
+        			var geneName="";
+				 	var basegeneName="";
+				 	if(d.value=='A')
+				 		geneName="Adenine";
+				 	else if(d.value=='C')
+				 		geneName="Cytosine";
+				 	else if(d.value=='G')
+				 		geneName="Guanine";
+				 	else if(d.value=='T')
+				 		geneName="Thiamine";
+				 	if(d.baseGene=='A')
+				 		basegeneName="Adenine";
+				 	else if(d.baseGene=='C')
+				 		basegeneName="Cytosine";
+				 	else if(d.baseGene=='G')
+				 		basegeneName="Guanine";
+				 	else if(d.baseGene=='T')
+				 		basegeneName="Thiamine";
+				 	if(d.value!='Z')
+				 	{
+				 	tip.transition()        
+                        .duration(200)   
+                        .style("opacity", .9); 
+                    if(d.rowCount==0)
+                    {
+                    	console.log("inside first row");
+                    	tip.html("<strong>Gene:</strong> <span style='color:#008AB8'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:#008AB8'>" + d.count + "</span><br><strong>Base Species:</strong> <span style='color:#008AB8'>" + d.name + "</span><br><strong>Base Nucleotide:</strong> <span style='color:#008AB8'>" + geneName + "</span>")
+                       .style("left", (d3.event.pageX+20) + "px")     
+                       .style("top", (d3.event.pageY - 120) + "px");
+                    }  
+                    else
+                    {
+                    tip.html("<strong>Gene:</strong> <span style='color:#008AB8'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:#008AB8'>" + d.count + "</span><br><strong>Species:</strong> <span style='color:#008AB8'>" + d.name + "</span><br><strong>Nucleotide:</strong> <span style='color:#008AB8'>" + geneName + "</span><br><strong>Base Species:</strong> <span style='color:#008AB8'>" + d.baseSpecies + "</span><br><strong>Base Nucleotide:</strong> <span style='color:#008AB8'>" + basegeneName + "</span>")
+                       .style("left", (d3.event.pageX+20) + "px")     
+                       .style("top", (d3.event.pageY - 120) + "px");
+                    }
+
+                	}
+        })
+		.on("mouseout", function(d){
+				 		tip.transition()        
+                        .duration(200)      
+                        .style("opacity", 0);
+				});
 	
 	}
 	}
