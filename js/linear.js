@@ -2,6 +2,7 @@ var full_file_path = "";
 var gene_sequence = "";
 var gene_st_ind = 0;
 var gene_desc = "";
+var cursor_style = "url(/closedhand.cur), move";
 function loadLightBox(fileName) {
     full_file_path = fileName;
     d3.json("data.json", function(data){
@@ -15,6 +16,8 @@ function loadLightBox(fileName) {
                 }
             }
         }   
+        document.getElementById("myModalFooter").innerHTML = gene_desc;
+        //document.getElementById("myModalBody").style.cursor = "move";
         var dataset = [];
 
         var div = d3.select("body").append("div")   
@@ -41,14 +44,12 @@ function loadLightBox(fileName) {
         .x(x)
         .scaleExtent([1,25])
         .on("zoom", zoomed);
-
         var linear_svg = d3.select(".modal-body").append("svg")
                             .attr("width", width + margin.left + margin.right)
                             .attr("height", height + margin.top + margin.bottom)
                             .append("g")
                             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
                             .call(zoom);
-
         var bar1 = linear_svg.selectAll('.bar').data(dataset)
                             .enter()
                             .append("g")
@@ -56,6 +57,7 @@ function loadLightBox(fileName) {
                                 return "translate(" + x(index) + "," + 20 + ")"
                             })
                             .attr("class","bar")
+                            .style('cursor',"url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur) 4 4, move")
                             .each(function(datum, index){
                                 var g = d3.select(this);
                                 var width = (x(1) - x(0));
@@ -116,16 +118,16 @@ function loadLightBox(fileName) {
             linear_svg.selectAll('.bar').remove();
             var multiplier = 10;
             var width = (x(1) - x(0));
-
-
+            
             var bar1 = linear_svg.selectAll('.bar').data(dataset)
                                 .enter()
                                 .append("g")
                                 .attr("transform", function(datum, index){
-                                    return "translate(" + x(index) + "," + 20 + ")"
+                                    return "translate(" +  Math.min(index*width, x(index)) + "," + 20 + ")"
                                 })
                                 .attr("width", width)
                                 .attr("class","bar")
+                                .style('cursor',"url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur) 4 4, move")
                                 .each(function(datum, index){
                                     var g = d3.select(this);
                                     g.append("rect")
