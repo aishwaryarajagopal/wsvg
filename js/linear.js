@@ -18,8 +18,9 @@ function loadLightBox(gene) {
     //            }
     //        }
     //    }
+        document.getElementById("myModalLabel").innerHTML = gene.className;
         document.getElementById("myModalFooter").innerHTML = gene.desc;
-        //document.getElementById("myModalBody").style.cursor = "move";
+
         var dataset = [];
 
         var div = d3.select("body").append("div")   
