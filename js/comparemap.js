@@ -108,7 +108,7 @@ function generateVis()
 	
 	var zoom = d3.behavior.zoom()
     .x(x)
-    .scaleExtent([1,22])
+    .scaleExtent([1,70])
     .on("zoom", zoomed);
 
 	//console.log(x(1)-x(0));
@@ -258,9 +258,15 @@ function generateVis()
 
 	function zoomed()
 	{
-	//console.log(zoom.scale());
-	//console.log(x(2)-x(1));
+	console.log(zoom.scale());
+	console.log(x(2)-x(1));
 	var width=x(1)-x(0);
+	//latest change
+	var currentZoom=d3.event.scale;
+	if(width>50)
+	{
+		zoom.scaleExtent([1,currentZoom])
+	}
 	svgCompare.selectAll('.row').remove();
 	var row1 = svgCompare.selectAll(".row")
                   .data(geneData)
@@ -282,7 +288,8 @@ function generateVis()
 				  return x(index);
 				 })
                  .attr("y", function(d) { return d.y; }) */
-                 .attr("width", function(d) { return zoom.scale(); })
+                 //.attr("width", function(d) { return zoom.scale(); })
+                 .attr("width", width)
                  .attr("height", function(d) { return d.height; })
                  .style("fill",function(d){return d.color;})
 				 .on("mouseover",function(d,index){
@@ -367,7 +374,7 @@ function generateVis()
 	 var text = row1.selectAll(".label")
         .data(function(d) {return d;})
       .enter().append("svg:text")
-        .attr("x", function(d,index) { return x(index)+zoom.scale()/2 })
+        .attr("x", function(d,index) { return x(index)+width/2 })
         .attr("y", function(d) { return d.y + d.height/2 })
         .attr("text-anchor","middle")
         .attr("font-size", "8")
