@@ -13,7 +13,7 @@ var colorMap = {
     "gianttrevally": "#756BB1",
     "harborseal": "#DD1C77",
     "wobblegong": "#99D8C9",
-    "human": "#FC9272",
+    "humans": "#FC9272",
     "sandbarshark": "#9EBCDA",
     "saltwatercrocodile": "#FEC44F",
     "whaleshark": "#1C9099",
@@ -44,11 +44,11 @@ var geneBundle = d3.layout.bundle();
 
 // The svg that is appended to the game-network div
 // Give enough space to layout the radial graph
-var radialSvg = d3.select("#radialVis").append("svg")
-    .attr("width", circlew)
-    .attr("height", diameter+240)
+var radialSvg = d3.select("#combinedVis").append("svg")
+    .attr("width", circlew + 200)
+    .attr("height", (diameter+240)*2)
     .append("g")
-    .attr("transform", "translate(" + (radius + 75) + "," + (radius - 150) + ")");
+    .attr("transform", "translate(" + (radius + 75) + "," + (530 + radius - 150) + ")");
 
 var svgDefs = radialSvg.append("svg:defs");
 
@@ -475,8 +475,8 @@ function setGenePopupPosition(e){
     var a = a * Math.PI / 180;
 
     // Center position of the radial vis
-    var cY = $("#radialVis").offset().top + radius - 150;
-    var cX = $("#radialVis").offset().left + radius + 75;
+    var cY = $("#combinedVis").offset().top + radius - 150 + 530;
+    var cX = $("#combinedVis").offset().left + radius + 75;
 
     // Subtract midpoints, so that midpoint is translated to origin
     // and add it in the end again

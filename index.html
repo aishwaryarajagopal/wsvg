@@ -54,7 +54,7 @@
                 <option value="blacktipreefshark">Blacktip Reef Shark</option>
                 <option value="giantgrouper">Giant Grouper</option>
                 <option value="gianttrevally">Giant Trevally</option>
-                <option value="human">Humans</option>
+                <option value="humans">Humans</option>
                 <option value="saltwatercrocodile">Salt Water Crocodile</option>
                 <option value="wobblegong">Wobblegong</option>
                 <option value="zebrafish">Zebra Fish</option>
@@ -67,7 +67,7 @@
                 <option value="blacktipreefshark">Blacktip Reef Shark</option>
                 <option value="giantgrouper">Giant Grouper</option>
                 <option value="gianttrevally">Giant Trevally</option>
-                <option value="human">Humans</option>
+                <option value="humans">Humans</option>
                 <option value="saltwatercrocodile">Salt Water Crocodile</option>
                 <option value="wobblegong">Wobblegong</option>
                 <option value="zebrafish">Zebra Fish</option>
@@ -80,7 +80,7 @@
                 <option value="blacktipreefshark">Blacktip Reef Shark</option>
                 <option value="giantgrouper">Giant Grouper</option>
                 <option value="gianttrevally">Giant Trevally</option>
-                <option value="human">Humans</option>
+                <option value="humans">Humans</option>
                 <option value="saltwatercrocodile">Salt Water Crocodile</option>
                 <option value="wobblegong">Wobblegong</option>
                 <option value="zebrafish">Zebra Fish</option>
@@ -93,7 +93,7 @@
                 <option value="blacktipreefshark">Blacktip Reef Shark</option>
                 <option value="giantgrouper">Giant Grouper</option>
                 <option value="gianttrevally">Giant Trevally</option>
-                <option value="human">Humans</option>
+                <option value="humans">Humans</option>
                 <option value="saltwatercrocodile">Salt Water Crocodile</option>
                 <option value="wobblegong">Wobblegong</option>
                 <option value="zebrafish">Zebra Fish</option>
@@ -109,10 +109,9 @@
 
         <!-- Page Content -->
         <div class="container">
-            <button data-toggle="modal" data-target="#myModal">Lightbox</button>
-
-            <div class="col-12" id="treeViz"> </div>
-            <div class="col-12" id="radialVis"> </div>
+            <div id="combinedDiv">
+                <svg id="combinedVis" width="100%" height="1410"/>
+            </div>
             <div class="col-12" id="compareViz"></div>
 
             <!-- latest d3 javascript -->
@@ -266,8 +265,8 @@ $(document).ready(function(){
       }
     }
     buildNewickNodes(myNewick)
-    d3.phylogram.build('#treeViz', myNewick, {
-              //width: 700,
+    d3.phylogram.build('#combinedVis', myNewick, {
+              width: 700,
               height: 500
             });
 });
@@ -291,8 +290,8 @@ function updatePhyloLabels(){
     selectedList.push($("#organism3 option:selected").text());
     selectedList.push($("#organism4 option:selected").text());
 
-    d3.phylogram.build('#treeViz', myNewick, {
-      //width: 700,
+    d3.phylogram.build('#combinedVis', myNewick, {
+      width: 700,
       height: 500
     });
 }
