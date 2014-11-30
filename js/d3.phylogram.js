@@ -48,9 +48,12 @@ if (!d3) { throw "d3 wasn't included!"};
     vis.selectAll('g.leaf.node')
       .append("svg:circle")
         .attr("r", 4.5)
-        .attr('stroke',  'yellowGreen')
-        .attr('fill', 'greenYellow')
-        .attr('stroke-width', '2px');
+        .attr('stroke',  'black')
+        .attr('fill',function(d){
+          //console.log(d.name.replace(/ /g,'').toLowerCase());
+          return colorMap[d.name.replace(/ /g,'').toLowerCase()];
+        })
+        .attr('stroke-width', '1px');
     
     /*vis.selectAll('g.root.node')
       .append('svg:circle')
@@ -167,14 +170,14 @@ if (!d3) { throw "d3 wasn't included!"};
         .attr('fill', 'black')
         .attr('style', function(d){
           if(listContainsEntryFor(d.name)==1){
-            
-            return "font-weight:bold; fill:red;"
+          //colorMap[d.name.replace(/ /g,'').toLowerCase()]
+            return "font-weight:bold; fill:"+colorMap[d.name.replace(/ /g,'').toLowerCase()]+";"
 
           }
         })
         .style("opacity", function(d) {
           if(listContainsEntryFor(d.name)!=1){
-            return 0.5;
+            return 0.3;
           }else{
             return 1;
           } 

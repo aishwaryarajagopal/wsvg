@@ -520,8 +520,8 @@ function addNodeToVis(added){
     geneMap.children.push(classMap[added]);
 
     // Get the number of empty quadrants and update the cluster's available degrees to represent that.
-    availDegrees = 90 * geneMap.children.length;
-    startDegrees = 45 * (geneMap.children.length - 2);
+//    availDegrees = 90 * geneMap.children.length;
+  //  startDegrees = 45 * (geneMap.children.length - 2);
 
     // Update the geneCluster so that we have a radial vis with quadrants missing.
     geneCluster.size([availDegrees, innerRadius]);
@@ -533,8 +533,8 @@ function removeNodeFromVis(remove) {
             return n.className != remove;
         });
     // Get the number of empty quadrants and update the cluster's available degrees to represent that.
-    availDegrees = 90 * geneMap.children.length;
-    startDegrees = 45 * (geneMap.children.length - 2);
+    //availDegrees = 90 * geneMap.children.length;
+    //startDegrees = 45 * (geneMap.children.length - 2);
 
     // Update the geneCluster so that we have a radial vis with quadrants missing.
     geneCluster.size([availDegrees, innerRadius]);
