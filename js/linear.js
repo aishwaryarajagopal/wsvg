@@ -113,7 +113,7 @@ function loadLightBox(gene) {
                                     .attr("text-anchor","middle")
                                     .attr("y", "13")
                                     .attr("x", width/2)
-                                    .attr("font-size", "8")
+                                    .attr("font-size", "10")
                                     .attr("fill", "black")
                                     .text(datum);
                                 }
@@ -185,7 +185,7 @@ function loadLightBox(gene) {
                                         .attr("text-anchor","middle")
                                         .attr("y", "13")
                                         .attr("x", width/2)
-                                        .attr("font-size", "8")
+                                        .attr("font-size", "10")
                                         .attr("fill", "black")
                                         .text(datum);
                                     }

@@ -266,7 +266,7 @@ $(document).ready(function(){
     }
     buildNewickNodes(myNewick)
     d3.phylogram.build('#combinedVis', myNewick, {
-              width: 700,
+              width: 900,
               height: 500
             });
 });
@@ -291,7 +291,7 @@ function updatePhyloLabels(){
     selectedList.push($("#organism4 option:selected").text());
 
     d3.phylogram.build('#combinedVis', myNewick, {
-      width: 700,
+      width: 900,
       height: 500
     });
 }

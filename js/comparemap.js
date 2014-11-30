@@ -53,7 +53,7 @@ function geneCompare(geneValues)
 	geneLength.sort(function(a,b){return b-a});
 	var maxLength=geneLength[0];
 	geneData = randomData(width, height,genes,speciesName,geneName);
-	labelData=randomData1(speciesName);
+	labelData=randomData1(speciesName,geneName);
 	generateVis();
 /*	for(var p=0;p<filenames.length;p++)
 	{
@@ -600,14 +600,14 @@ function randomData(gridWidth, gridHeight,genes,species,gene)
     }
     return data;
 } 
-function randomData1(speciesName)
+function randomData1(speciesName,geneName)
 {
 	var datalabel=new Array();
 	var ypos=30;
 	for(var index_c=0;index_c<speciesName.length;index_c++)
 	{
 		datalabel.push({
-			labelVal:speciesName[index_c],
+			labelVal:speciesName[index_c]+"_"+geneName[index_c],
 			yval:ypos
 		});
 		ypos=ypos+40;
