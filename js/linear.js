@@ -4,6 +4,7 @@ var full_file_path = "";
 //var gene_desc = "";
 var cursor_style = "url(/closedhand.cur), move";
 function loadLightBox(gene) {
+    $('#myModal').modal('show');
     console.log(gene);
     //full_file_path = fileName;
     //d3.json("data.json", function(data){
@@ -45,7 +46,9 @@ function loadLightBox(gene) {
         .x(x)
         .scaleExtent([1,25])
         .on("zoom", zoomed);
+        d3.selectAll('.linsvg').remove();
         var linear_svg = d3.select(".modal-body").append("svg")
+                            .attr("class","linsvg")
                             .attr("width", width + margin.left + margin.right)
                             .attr("height", height + margin.top + margin.bottom)
                             .append("g")
