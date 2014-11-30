@@ -47,7 +47,7 @@
 <div class="row" style="width:100%;" id="containingRow">
     <div class="col-md-12" id="mainContent">
         <div id="selection bar" align="center">
-            <select id="organism1" onchange="selectChange(1,this.value)">
+            <select id="organism1" onchange="selectChange(1,this.value); updatePhyloLabels();">
                 <option value="undefined">Pick one...</option>
                 <option value="whaleshark">Whale Shark</option>
                 <option value="sandbarshark">Sandbar Shark</option>
@@ -60,7 +60,7 @@
                 <option value="zebrafish">Zebra Fish</option>
                 <option value="harborseal">Harbor Seal</option>
             </select>
-            <select id="organism2" onchange="selectChange(2,this.value)">
+            <select id="organism2" onchange="selectChange(2,this.value); updatePhyloLabels();">
                 <option value="undefined">Pick one...</option>
                 <option value="whaleshark">Whale Shark</option>
                 <option value="sandbarshark">Sandbar Shark</option>
@@ -73,7 +73,7 @@
                 <option value="zebrafish">Zebra Fish</option>
                 <option value="harborseal">Harbor Seal</option>
             </select>
-            <select id="organism3" onchange="selectChange(3,this.value)">
+            <select id="organism3" onchange="selectChange(3,this.value); updatePhyloLabels();">
                 <option value="undefined" selected>--</option>
                 <option value="whaleshark">Whale Shark</option>
                 <option value="sandbarshark">Sandbar Shark</option>
@@ -86,7 +86,7 @@
                 <option value="zebrafish">Zebra Fish</option>
                 <option value="harborseal">Harbor Seal</option>
             </select>
-            <select id="organism4" onchange="selectChange(4,this.value)">
+            <select id="organism4" onchange="selectChange(4,this.value); updatePhyloLabels();">
                 <option value="undefined" selected>--</option>
                 <option value="whaleshark">Whale Shark</option>
                 <option value="sandbarshark">Sandbar Shark</option>
@@ -101,7 +101,7 @@
             </select>
 
             <!--<button onclick="updateRadialVis()">New Radial</button>-->
-            <button onclick="updatePhyloLabels()">Visualize</button>
+            <!--<button onclick="updatePhyloLabels()">Visualize</button>-->
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <span id="infoWikiShow" class="glyphicon glyphicon-circle-arrow-left" style="font-size:24px ;"></span>
             <span id="infoWikiHide" class="glyphicon glyphicon-circle-arrow-right hide" style="font-size:24px ;"></span>
@@ -270,7 +270,32 @@ $(document).ready(function(){
               //width: 700,
               height: 500
             });
+});
+
+function updatePhyloLabels(){
+    var myNewick = Newick.parse("(((((Blacktip Reef Shark:0.03585079,Sandbar Shark:0.03817814):0.06951782,(Whale Shark:0.08480993,Wobblegong:0.08552503):0.03996305):0.10105021,(Zebra Fish:0.18717747,(Giant Trevally:0.12005668,Giant Grouper:0.12993306):0.06658514):0.04722950):0.07006108,(Harbor Seal:0.15013151,Humans:0.17840333):0.12409540):0.00351495,Salt Water Crocodile:0.31732372);");
+
+    var newickNodes = [];
+    function buildNewickNodes(node, callback) {
+      newickNodes.push(node);
+      if (node.branchset) {
+        for (var i=0; i < node.branchset.length; i++) {
+          buildNewickNodes(node.branchset[i])
+        }
+      }
+    };
+    buildNewickNodes(myNewick);
+    selectedList=[];
+    selectedList.push($("#organism1 option:selected").text());
+    selectedList.push($("#organism2 option:selected").text());
+    selectedList.push($("#organism3 option:selected").text());
+    selectedList.push($("#organism4 option:selected").text());
+
+    d3.phylogram.build('#treeViz', myNewick, {
+      //width: 700,
+      height: 500
     });
+}
 
 </script>
 </html>

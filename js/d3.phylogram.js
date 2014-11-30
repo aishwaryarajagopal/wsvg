@@ -167,7 +167,9 @@ if (!d3) { throw "d3 wasn't included!"};
         .attr('fill', 'black')
         .attr('style', function(d){
           if(listContainsEntryFor(d.name)==1){
+            
             return "font-weight:bold; fill:red;"
+
           }
         })
         .style("opacity", function(d) {
