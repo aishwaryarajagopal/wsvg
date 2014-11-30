@@ -19,7 +19,7 @@
     <!-- Custom CSS -->
     <style type="text/css">
       body {
-          padding-top: 70px;
+          /*padding-top: 20px;*/
           font-family: "Helvetica Neue", Helvetica, sans-serif;
       }
       td { vertical-align: top; }
@@ -41,11 +41,9 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
 </head>
-
 <body>
-
     <div class="col-md-12" id="mainContent">
-        <div id="selection bar" align="center">
+        <div id="selection bar" align="center" style="background-color:gray;">
             <select id="organism1" onchange="selectChange(1,this.value); updatePhyloLabels();">
                 <option value="undefined">Pick one...</option>
                 <option value="whaleshark">Whale Shark</option>
@@ -106,8 +104,8 @@
         <!-- Page Content -->
         <div class="container" style="width:100%">
             <div align="right">
-            <span id="infoWikiShow" class="glyphicon glyphicon-circle-arrow-left" style="font-size:24px ;"></span>
-            <span id="infoWikiHide" class="glyphicon glyphicon-circle-arrow-right hide" style="font-size:24px ;"></span>
+            <span id="infoWikiShow" class="glyphicon glyphicon-info-sign" style="font-size:24px ;"></span>
+            <span id="infoWikiHide" class="glyphicon glyphicon-remove-circle hide" style="font-size:24px ;"></span>
             </div>
             <div id="treeViz"></div>
             <div id="radialViz"></div>
@@ -164,7 +162,7 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
+                <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
                         <p>Phylo Tree</p>
                     </div>
@@ -178,7 +176,7 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapseTwo" class="panel-collapse collapse in">
+                <div id="collapseTwo" class="panel-collapse collapse">
                     <div class="panel-body">
                         <b>Radial Viz</b>
                     </div>
@@ -192,7 +190,7 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapseThree" class="panel-collapse collapse in">
+                <div id="collapseThree" class="panel-collapse collapse">
                     <div class="panel-body">
                         <b>Compare Map</b>
                     </div>
