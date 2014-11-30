@@ -258,8 +258,8 @@ function generateVis()
 
 	function zoomed()
 	{
-	//console.log(zoom.scale());
-	//console.log(x(2)-x(1));
+	console.log(zoom.scale());
+	console.log(x(2)-x(1));
 	var width=x(1)-x(0);
 	svgCompare.selectAll('.row').remove();
 	var row1 = svgCompare.selectAll(".row")
