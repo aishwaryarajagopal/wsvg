@@ -45,7 +45,7 @@ function loadLightBox(gene) {
 
         var zoom = d3.behavior.zoom()
         .x(x)
-        .scaleExtent([1,25])
+        .scaleExtent([1,100])
         .on("zoom", zoomed);
         d3.selectAll('.linsvg').remove();
         var linear_svg = d3.select(".modal-body").append("svg")
@@ -84,7 +84,7 @@ function loadLightBox(gene) {
                                         return "black";
                                     })
                                     .style("stroke-width",function(d){
-                                        return width/9;
+                                        return width/19;
                                     })
                                     .on("mouseover", function(d) {
                                         var desc = "";
@@ -121,8 +121,11 @@ function loadLightBox(gene) {
 
         function zoomed() {
             linear_svg.selectAll('.bar').remove();
-            var multiplier = 10;
             var width = (x(1) - x(0));
+            var currentZoom = d3.event.scale;
+            if (width > 50){
+                zoom.scaleExtent([1,currentZoom])
+            }
             
             var bar1 = linear_svg.selectAll('.bar').data(dataset)
                                 .enter()
@@ -152,7 +155,7 @@ function loadLightBox(gene) {
                                             return "black";
                                     })
                                     .style("stroke-width",function(d){
-                                            return width/9;
+                                            return width/19;
                                     })
                                     .on("mouseover", function(d) {
                                         var desc = "";
