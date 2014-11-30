@@ -108,7 +108,7 @@ function generateVis()
 	
 	var zoom = d3.behavior.zoom()
     .x(x)
-    .scaleExtent([1,25])
+    .scaleExtent([1,70])
     .on("zoom", zoomed);
 
 	//console.log(x(1)-x(0));
@@ -261,6 +261,12 @@ function generateVis()
 	console.log(zoom.scale());
 	console.log(x(2)-x(1));
 	var width=x(1)-x(0);
+	//latest change
+	var currentZoom=d3.event.scale;
+	if(width>50)
+	{
+		zoom.scaleExtent([1,currentZoom])
+	}
 	svgCompare.selectAll('.row').remove();
 	var row1 = svgCompare.selectAll(".row")
                   .data(geneData)
