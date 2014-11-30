@@ -44,7 +44,6 @@
 
 <body>
 
-<div class="row" style="width:100%;" id="containingRow">
     <div class="col-md-12" id="mainContent">
         <div id="selection bar" align="center">
             <select id="organism1" onchange="selectChange(1,this.value); updatePhyloLabels();">
@@ -102,14 +101,14 @@
 
             <!--<button onclick="updateRadialVis()">New Radial</button>-->
             <!--<button onclick="updatePhyloLabels()">Visualize</button>-->
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span id="infoWikiShow" class="glyphicon glyphicon-circle-arrow-left" style="font-size:24px ;"></span>
-            <span id="infoWikiHide" class="glyphicon glyphicon-circle-arrow-right hide" style="font-size:24px ;"></span>
         </div>
 
         <!-- Page Content -->
         <div class="container" style="width:100%">
-            
+            <div align="right">
+            <span id="infoWikiShow" class="glyphicon glyphicon-circle-arrow-left" style="font-size:24px ;"></span>
+            <span id="infoWikiHide" class="glyphicon glyphicon-circle-arrow-right hide" style="font-size:24px ;"></span>
+            </div>
             <div id="treeViz"></div>
             <div id="radialViz"></div>
             <div id="compareViz"></div>
@@ -231,7 +230,7 @@
         //$("#panelContent").addClass("hide");
         $("#infoWiki").removeClass("hide");
         $("#mainContent").removeClass("col-md-12");
-        $("#mainContent").addClass("col-md-8");
+        $("#mainContent").addClass("col-md-9");
 
         $("#infoWikiShow").addClass("hide");
         $("#infoWikiHide").removeClass("hide");
@@ -241,7 +240,7 @@
         $('#infoWikiHide').click(function (e) {
         //$("#panelContent").addClass("hide");
         $("#infoWiki").addClass("hide");
-        $("#mainContent").removeClass("col-md-8");
+        $("#mainContent").removeClass("col-md-9");
         $("#mainContent").addClass("col-md-12");
 
         $("#infoWikiHide").addClass("hide");
