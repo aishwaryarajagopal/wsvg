@@ -92,7 +92,7 @@ if (!d3) { throw "d3 wasn't included!"};
     options = options || {}
     var w = options.width || d3.select(selector).style('width') || d3.select(selector).attr('width'),
         h = options.height || d3.select(selector).style('height') || d3.select(selector).attr('height'),
-        w = parseInt(w),
+        w = parseInt(w)-200,
         h = parseInt(h);
         
     var tree = options.tree || d3.layout.cluster()
