@@ -1,22 +1,23 @@
 var full_file_path = "";
-var gene_sequence = "";
-var gene_st_ind = 0;
-var gene_desc = "";
+//var gene_sequence = "";
+//var gene_st_ind = 0;
+//var gene_desc = "";
 var cursor_style = "url(/closedhand.cur), move";
-function loadLightBox(fileName) {
-    full_file_path = fileName;
-    d3.json("data.json", function(data){
-        for (var i=0;i<data.length;i++){
-        if(full_file_path.indexOf(data[i].path) > -1){
-            for(var j=0; j<data[i].genes.length;j++){
-                if(full_file_path.indexOf(data[i].genes[j].path) > -1){
-                    gene_desc = data[i].genes[j].desc;
-                    gene_sequence = data[i].genes[j].sequence;
-                    gene_st_ind = parseInt(data[i].genes[j].startIndex);
-                }
-            }
-        }   
-        document.getElementById("myModalFooter").innerHTML = gene_desc;
+function loadLightBox(gene) {
+    console.log(gene);
+    //full_file_path = fileName;
+    //d3.json("data.json", function(data){
+    //    for (var i=0;i<data.length;i++){
+    //    if(full_file_path.indexOf(data[i].path) > -1){
+    //        for(var j=0; j<data[i].genes.length;j++){
+    //            if(full_file_path.indexOf(data[i].genes[j].path) > -1){
+    //                gene_desc = data[i].genes[j].desc;
+    //                gene_sequence = data[i].genes[j].sequence;
+    //                gene_st_ind = parseInt(data[i].genes[j].startIndex);
+    //            }
+    //        }
+    //    }
+        document.getElementById("myModalFooter").innerHTML = gene.desc;
         //document.getElementById("myModalBody").style.cursor = "move";
         var dataset = [];
 
@@ -24,8 +25,8 @@ function loadLightBox(fileName) {
         .attr("class", "tooltip")               
         .style("opacity", 0);
 
-        for (var i=0;i<gene_sequence.length; i++){
-            dataset[i] = gene_sequence.charAt(i);
+        for (var i=0;i<gene.sequence.length; i++){
+            dataset[i] = gene.sequence.charAt(i);
         }
         
         var margin = {top: 20, right: 20, bottom: 30, left: 20},
@@ -33,7 +34,7 @@ function loadLightBox(fileName) {
         height = 80 - margin.top - margin.bottom;
 
         var x = d3.scale.linear()
-        .domain([0, gene_sequence.length])
+        .domain([0, gene.sequence.length])
         .range([0, width]);
 
         var y = d3.scale.linear()
@@ -94,7 +95,7 @@ function loadLightBox(fileName) {
                                         div.transition()        
                                         .duration(200)      
                                         .style("opacity", .9);      
-                                        div .html("<strong> "+desc+"<BR>Position : "+(gene_st_ind + index)+"</strong>")
+                                        div .html("<strong> "+desc+"<BR>Position : "+(gene.startIndex + index)+"</strong>")
                                         .style("left", (d3.event.pageX) + "px")     
                                         .style("top", (100) + "px");    
                                     })
@@ -162,7 +163,7 @@ function loadLightBox(fileName) {
                                         div.transition()        
                                         .duration(200)      
                                         .style("opacity", .9);      
-                                        div .html("<strong> "+desc+"<BR>Position : "+(gene_st_ind + index)+"</strong>")
+                                        div .html("<strong> "+desc+"<BR>Position : "+(gene.startIndex + index)+"</strong>")
                                         .style("left", (d3.event.pageX) + "px")     
                                         .style("top", (100) + "px");    
                                     })
@@ -184,6 +185,6 @@ function loadLightBox(fileName) {
 
                                 });
         }
-    }
-    });
+    //}
+    //});
 }

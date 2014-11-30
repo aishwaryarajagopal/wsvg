@@ -24,14 +24,15 @@ geneCompare(geneValues);
 } 
 function init5()
 {
-var geneValues=[{speciesName:"BlacktipReefShark",geneName:"ATP6",sequence:"ATGATTATAAGCTTCTTTGATCAATTCTTAAGCCCATCACTTATTGGAATCCCCCTTATTGCCCTAGCAATTTTAATTCCATGATTAACCTTTCCAACCCCAACTAATCGATGACTAAATAACCGACTAATCACCCTCCAAGGGTGATTTATTAATCGTTTTGTTTATCAACTTATACAACCAATTAATCTTGGAGGACATAAATGAGCTATACTACTAACAGCCCTAATACTATTTCTAATTACCATTAACCTTTTAGGCCTTCTTCCGTATACATTTACTCCTACAACACAACTTTCTCTAAATATAGCATTTGCCCTCCCACTATGACTTACAACTGTATTAATTGGTATATTAAACCAACCTACAATTACATTAGGCCACCTTCTTCCAGAAGGAACACCAACTCCTTTAATTCCAATCCTTATTATTATCGAAACTATTAGCCTATTTATTCGACCATTAGCCCTAGGGGTCCGACTAACTGCCAATTTAACAGCAGGTCACCTTCTAATACAACTAATTGCCACTGCAGCATTTGTTCTCTTGACCATCATACCAACCGTAGCCTTATTAACTTCTACAATTCTATTCTTATTAACAATCCTAGAAGTAGCTGTAGCAATAATCCAAGCATATGTATTTGTTCTCCTACTAAGCTTATACCTACAAGAAAACGTATAA"}
-				,{speciesName:"Human",geneName:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}
-				,{speciesName:"Human",geneName:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}
-				,{speciesName:"BlacktipReefShark",geneName:"ATP6",sequence:"ATGATTATAAGCTTCTTTGATCAATTCTTAAGCCCATCACTTATTGGAATCCCCCTTATTGCCCTAGCAATTTTAATTCCATGATTAACCTTTCCAACCCCAACTAATCGATGACTAAATAACCGACTAATCACCCTCCAAGGGTGATTTATTAATCGTTTTGTTTATCAACTTATACAACCAATTAATCTTGGAGGACATAAATGAGCTATACTACTAACAGCCCTAATACTATTTCTAATTACCATTAACCTTTTAGGCCTTCTTCCGTATACATTTACTCCTACAACACAACTTTCTCTAAATATAGCATTTGCCCTCCCACTATGACTTACAACTGTATTAATTGGTATATTAAACCAACCTACAATTACATTAGGCCACCTTCTTCCAGAAGGAACACCAACTCCTTTAATTCCAATCCTTATTATTATCGAAACTATTAGCCTATTTATTCGACCATTAGCCCTAGGGGTCCGACTAACTGCCAATTTAACAGCAGGTCACCTTCTAATACAACTAATTGCCACTGCAGCATTTGTTCTCTTGACCATCATACCAACCGTAGCCTTATTAACTTCTACAATTCTATTCTTATTAACAATCCTAGAAGTAGCTGTAGCAATAATCCAAGCATATGTATTTGTTCTCCTACTAAGCTTATACCTACAAGAAAACGTATAA"}];
+var geneValues=[{speciesClass:"BlacktipReefShark",name:"ATP6",sequence:"ATGATTATAAGCTTCTTTGATCAATTCTTAAGCCCATCACTTATTGGAATCCCCCTTATTGCCCTAGCAATTTTAATTCCATGATTAACCTTTCCAACCCCAACTAATCGATGACTAAATAACCGACTAATCACCCTCCAAGGGTGATTTATTAATCGTTTTGTTTATCAACTTATACAACCAATTAATCTTGGAGGACATAAATGAGCTATACTACTAACAGCCCTAATACTATTTCTAATTACCATTAACCTTTTAGGCCTTCTTCCGTATACATTTACTCCTACAACACAACTTTCTCTAAATATAGCATTTGCCCTCCCACTATGACTTACAACTGTATTAATTGGTATATTAAACCAACCTACAATTACATTAGGCCACCTTCTTCCAGAAGGAACACCAACTCCTTTAATTCCAATCCTTATTATTATCGAAACTATTAGCCTATTTATTCGACCATTAGCCCTAGGGGTCCGACTAACTGCCAATTTAACAGCAGGTCACCTTCTAATACAACTAATTGCCACTGCAGCATTTGTTCTCTTGACCATCATACCAACCGTAGCCTTATTAACTTCTACAATTCTATTCTTATTAACAATCCTAGAAGTAGCTGTAGCAATAATCCAAGCATATGTATTTGTTCTCCTACTAAGCTTATACCTACAAGAAAACGTATAA"}
+				,{speciesClass:"Human",name:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}
+				,{speciesClass:"Human",name:"TN",sequence:"TAGATTGAAGCCAGTTGATTAGGGTGCTTAGCTGTTAACTAAGTGTTTGTGGGTTTAAGTCCCATTGGTCTAG"}
+				,{speciesClass:"BlacktipReefShark",name:"ATP6",sequence:"ATGATTATAAGCTTCTTTGATCAATTCTTAAGCCCATCACTTATTGGAATCCCCCTTATTGCCCTAGCAATTTTAATTCCATGATTAACCTTTCCAACCCCAACTAATCGATGACTAAATAACCGACTAATCACCCTCCAAGGGTGATTTATTAATCGTTTTGTTTATCAACTTATACAACCAATTAATCTTGGAGGACATAAATGAGCTATACTACTAACAGCCCTAATACTATTTCTAATTACCATTAACCTTTTAGGCCTTCTTCCGTATACATTTACTCCTACAACACAACTTTCTCTAAATATAGCATTTGCCCTCCCACTATGACTTACAACTGTATTAATTGGTATATTAAACCAACCTACAATTACATTAGGCCACCTTCTTCCAGAAGGAACACCAACTCCTTTAATTCCAATCCTTATTATTATCGAAACTATTAGCCTATTTATTCGACCATTAGCCCTAGGGGTCCGACTAACTGCCAATTTAACAGCAGGTCACCTTCTAATACAACTAATTGCCACTGCAGCATTTGTTCTCTTGACCATCATACCAACCGTAGCCTTATTAACTTCTACAATTCTATTCTTATTAACAATCCTAGAAGTAGCTGTAGCAATAATCCAAGCATATGTATTTGTTCTCCTACTAAGCTTATACCTACAAGAAAACGTATAA"}];
 geneCompare(geneValues);
 } 
 function geneCompare(geneValues)
 {
+	console.log(geneValues);
 	var geneData;
 	var zVal='';
 	var genes=[];
@@ -40,8 +41,8 @@ function geneCompare(geneValues)
 	var geneLength=[];
 	for(var k=0;k<geneValues.length;k++)
 	{
-		speciesName.push(geneValues[k].speciesName);
-		geneName.push(geneValues[k].geneName);
+		speciesName.push(geneValues[k].speciesClass);
+		geneName.push(geneValues[k].name);
 		genes.push(geneValues[k].sequence);
 	}
 	for(var j=0;j<genes.length;j++)
@@ -97,7 +98,7 @@ function processData(jsondata)
 function generateVis()
 {
 	var yval=10
-	console.log("main_maxlength"+maxLength);
+	//console.log("main_maxlength"+maxLength);
 	//console.log("geneData "+geneData);
 	d3.select(".vis").remove();
 	d3.select(".vislabel").remove();
@@ -110,7 +111,7 @@ function generateVis()
     .scaleExtent([1,22])
     .on("zoom", zoomed);
 
-	console.log(x(1)-x(0));
+	//console.log(x(1)-x(0));
 
 	var tip =d3.select("body").append("div")   
                             .attr("class", "d3-tip")               
@@ -120,6 +121,7 @@ function generateVis()
    					.style("width", 140)
                     .style("height", height + margin.top + margin.bottom)
                     .style("float","left")
+					.style("background","#777777")
     				.attr("class","vislabel")
     				.append("g");
 
@@ -147,7 +149,7 @@ function generateVis()
         			.attr("text-anchor","middle")
         			.attr("font-size", "12")
         			.text(function(d) { 
-        			console.log("inside labeltext");
+        			//console.log("inside labeltext");
 					return d.labelVal;
 					}); 
 
@@ -156,6 +158,7 @@ function generateVis()
                     .style("width", width + margin.left + margin.right)
                     .style("height", height + margin.top + margin.bottom)
                     .attr("class", "vis")
+					.style("background","#777777")
                     .call(zoom)
 					.on("dblclick.zoom", null);	
 					
@@ -178,7 +181,7 @@ function generateVis()
                  .attr("height", function(d) { return d.height; })
                  .style("fill",function(d){return d.color;})
                   .on("mouseover",function(d,index){
-				 console.log("inside mouse hover");
+				 //console.log("inside mouse hover");
 				 	row.selectAll('.cell')				
 					/*.style("fill",function(d){
 					if(d.count==index)
@@ -231,7 +234,7 @@ function generateVis()
                         .style("opacity", .9); 
                     if(d.rowCount==0)
                     {
-                    	console.log("inside first row");
+                    	//console.log("inside first row");
                     	tip.html("<strong>Gene:</strong> <span style='color:#008AB8'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:#008AB8'>" + d.count + "</span><br><strong>Base Species:</strong> <span style='color:#008AB8'>" + d.name + "</span><br><strong>Base Nucleotide:</strong> <span style='color:#008AB8'>" + geneName + "</span>")
                        .style("left", (d3.event.pageX+20) + "px")     
                        .style("top", (d3.event.pageY - 120) + "px");
@@ -255,8 +258,8 @@ function generateVis()
 
 	function zoomed()
 	{
-	console.log(zoom.scale());
-	console.log(x(2)-x(1));
+	//console.log(zoom.scale());
+	//console.log(x(2)-x(1));
 	var width=x(1)-x(0);
 	svgCompare.selectAll('.row').remove();
 	var row1 = svgCompare.selectAll(".row")
@@ -283,7 +286,7 @@ function generateVis()
                  .attr("height", function(d) { return d.height; })
                  .style("fill",function(d){return d.color;})
 				 .on("mouseover",function(d,index){
-				 console.log("inside mouse hover");
+				 //console.log("inside mouse hover");
 				 	row1.selectAll('.cell')				
 					/*.style("fill",function(d){
 					if(d.count==index)
@@ -311,8 +314,8 @@ function generateVis()
 					
 				 })
 				 .on("click",function(d){
-				 	console.log("inside click");
-				 	console.log("row"+d.rowCount)
+				 	//console.log("inside click");
+				 	//console.log("row"+d.rowCount)
 				 	var geneName="";
 				 	var basegeneName="";
 				 	if(d.value=='A')
@@ -338,7 +341,7 @@ function generateVis()
                         .style("opacity", .9); 
                     if(d.rowCount==0)
                     {
-                    	console.log("inside first row");
+                    	//console.log("inside first row");
                     	tip.html("<strong>Gene:</strong> <span style='color:#008AB8'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:#008AB8'>" + d.count + "</span><br><strong>Base Species:</strong> <span style='color:#008AB8'>" + d.name + "</span><br><strong>Base Nucleotide:</strong> <span style='color:#008AB8'>" + geneName + "</span>")
                        .style("left", (d3.event.pageX+20) + "px")     
                        .style("top", (d3.event.pageY - 120) + "px");
@@ -374,7 +377,7 @@ function generateVis()
 		else
 			return zVal;})
         .on("click",function(d){
-        	console.log("text click");
+        	//console.log("text click");
         			var geneName="";
 				 	var basegeneName="";
 				 	if(d.value=='A')
@@ -400,7 +403,7 @@ function generateVis()
                         .style("opacity", .9); 
                     if(d.rowCount==0)
                     {
-                    	console.log("inside first row");
+                    	//console.log("inside first row");
                     	tip.html("<strong>Gene:</strong> <span style='color:#008AB8'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:#008AB8'>" + d.count + "</span><br><strong>Base Species:</strong> <span style='color:#008AB8'>" + d.name + "</span><br><strong>Base Nucleotide:</strong> <span style='color:#008AB8'>" + geneName + "</span>")
                        .style("left", (d3.event.pageX+20) + "px")     
                        .style("top", (d3.event.pageY - 120) + "px");
@@ -435,7 +438,7 @@ function randomData(gridWidth, gridHeight,genes,species,gene)
 	}
 	genesLength.sort(function(a,b){return b-a});
 	var maxLength=genesLength[0];
-	console.log("max"+maxLength);
+	//console.log("max"+maxLength);
 	var geneFirst=new Array();
 	var data = new Array();
 	var gridItemWidth = gridWidth / maxLength;
@@ -461,7 +464,7 @@ function randomData(gridWidth, gridHeight,genes,species,gene)
 				{
 					geneVal=geneVal+"Z";
 				}
-			console.log("geneSeq"+geneVal+geneVal.length);
+			//console.log("geneSeq"+geneVal+geneVal.length);
 		}
 	genesNew.push(geneVal);
 	}

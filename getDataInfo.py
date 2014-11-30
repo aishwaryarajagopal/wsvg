@@ -28,7 +28,7 @@ for d in allDirs:
 		length = 0
 		for f in allFiles:
 			# Only read out the files that are FASTA and not the name of the species
-			if(f.endswith(".fa") and not f.startswith(d)):
+			if((f.endswith(".fa") or f.endswith(".fas")) and not f.startswith(d)):
 				fastaPath = os.path.join(dPath, f)
 				print(fastaPath)
 				fasta = open(fastaPath)
