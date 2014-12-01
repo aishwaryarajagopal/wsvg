@@ -554,4 +554,3 @@ function initializeRadialVis() {
     radialSvg.selectAll("*").remove();
     svgDefs = radialSvg.append("svg:defs");
 }
-
