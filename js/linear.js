@@ -18,10 +18,13 @@ function loadLightBox(gene) {
     var margin = {top: 20, right: 20, bottom: 30, left: 20},
     width = 560 - margin.left - margin.right,
     height = 80 - margin.top - margin.bottom;
+    
     var x_limit = Math.min(gene.sequence.length, width)
+
     var x = d3.scale.linear()
             .domain([0, x_limit])
             .range([0, width]);
+
     // var x = d3.scale.linear()
     // .domain([0, gene.sequence.length])
     // .range([0, width]);
@@ -53,6 +56,7 @@ function loadLightBox(gene) {
                         .style('cursor',"url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur) 4 4, move")
                         .each(function(datum, index){
                             var g = d3.select(this);
+                            console.log("aish",g);
                             var width = (x(1) - x(0));
 
                             g.append("rect")
@@ -119,13 +123,13 @@ function loadLightBox(gene) {
                 })
                 .each(function(datum, index){
                     if(width >9){
-                        var g = d3.select(this);
+                        var g = d3.select(this.parentNode);
+                        console.log(g)
                         g.append("text")
                         .attr("text-anchor","middle")
                         .attr("y", "13")
                         .attr("x", width/2)
                         .attr("font-size", "8")
-                        .attr("fill", "black")
                         .text(datum);
                     }
                 });
