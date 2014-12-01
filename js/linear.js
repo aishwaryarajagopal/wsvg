@@ -130,6 +130,8 @@ function loadLightBox(gene) {
                         .attr("y", "13")
                         .attr("x", width/2)
                         .attr("font-size", "8")
+                        .attr("fill", "black !important;")
+                        .attr("style","font-family: Calibri")
                         .text(datum);
                     }
                 });
