@@ -1,8 +1,3 @@
-var full_file_path = "";
-//var gene_sequence = "";
-//var gene_st_ind = 0;
-//var gene_desc = "";
-var cursor_style = "url(/closedhand.cur), move";
 function loadLightBox(gene) {
     $('#myModal').modal('show');
     console.log(gene);
@@ -107,7 +102,6 @@ function loadLightBox(gene) {
                         });
     function zoomed() {
         var width = (x(1) - x(0));
-        // var t = zoom.translate();
         var currentZoom = d3.event.scale;
         if (width > 50){
             zoom.scaleExtent([1,currentZoom])
@@ -115,11 +109,6 @@ function loadLightBox(gene) {
 
         linear_svg.selectAll(".bar")
                 .attr('transform',function(datum, index){
-                    // tx = (t[index])
-                    // tx = Math.min(tx, 0);
-                    // tx = Math.max(tx, width);
-                    // console.log(tx);
-
                     return "translate(" +  Math.min(index*width, x(index)) + "," + 20+ ")"
                 });
         linear_svg.selectAll('text').remove();
