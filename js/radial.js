@@ -29,10 +29,9 @@ var selectValues = ["undefined","undefined","undefined","undefined"];
 var diameter = 640,
     radius = 940 / 2,
     innerRadius = radius - 270,
-    circlew = 940,
+    padding = 240,
     availDegrees = 360,
-    startDegrees = 0,
-    radialSections = 4;
+    startDegrees = 0;
 
 // Cluster of each gene bars that appear in a quadrant
 var geneCluster = d3.layout.cluster()
@@ -44,13 +43,8 @@ var geneBundle = d3.layout.bundle();
 
 // The svg that is appended to the game-network div
 // Give enough space to layout the radial graph
-var radialSvg = d3.select("#radialViz").append("svg")
-    .attr("width", circlew + 200)
-    .attr("height", (diameter+240)*2)
-    .append("g")
-    .attr("transform", "translate(" + (radius + 75) + "," + ( radius - 150) + ")");
-
-var svgDefs = radialSvg.append("svg:defs");
+var radialSvg,
+    svgDefs;
 
 // Define the line type that will be used to connect genes
 var line = d3.svg.line.radial()
@@ -167,12 +161,9 @@ function drawRadialVis(){
 
     // Transition the genes to their position
     icons.transition().duration(moveTime)
-        //.attr("transform", function(d) {
-        //    return "rotate(" + (d.x - startDegrees) + ") translate(300)";
-        //});
         .attr('y', function(d){
             var y = 325 * Math.sin((d.x - startDegrees) * Math.PI /180);
-            return y - 25;
+            return y - 50;
         })
         .attr('x', function(d){
             var x = 325 * Math.cos((d.x - startDegrees) * Math.PI /180);
@@ -186,7 +177,7 @@ function drawRadialVis(){
         .attr('width', 100)
         .attr('y', function(d){
             var y = 325 * Math.sin((d.x - startDegrees) * Math.PI / 180);
-            return y - 25;
+            return y - 50;
         })
         .attr('x', function(d){
             var x = 325 * Math.cos((d.x - startDegrees) * Math.PI / 180);
@@ -245,7 +236,7 @@ function drawRadialVis(){
     // Transition the genes to their position
     bars.transition().duration(moveTime)
         .attr("transform", function(d) {
-            return "translate(-200) rotate(" + (d.x - startDegrees - d.x0) + ") translate(200)";
+            return "translate("+ -d.y +") rotate(" + (d.x - startDegrees - d.x0) + ") translate("+ d.y +")";
         });
 
     bars.attr("angle", function(d) { return d.x - startDegrees; });
@@ -297,8 +288,8 @@ function drawRadialVis(){
         .transition().duration(moveTime)
         .attr("dx", function(d) { return d.x < 180 ? 0 : 0; })
         .attr("angle", function(d) { return d.x - startDegrees; })
-        .attr("text-anchor", function(d) { return (d.x + 90 - startDegrees) < 180 ? "start" : "end"; })
-        .attr("transform", function(d) { return (d.x + 90 - startDegrees) < 180 ? null : "rotate(180)"; });
+        .attr("text-anchor", function(d) { return (d.x < 90 || d.x > 270) ? "start" : "end"; })
+        .attr("transform", function(d) { return (d.x < 90 || d.x > 270) ? null : "rotate(180)"; });
 
     text.enter().append("g")
         .attr("class", 'radnode')
@@ -312,8 +303,8 @@ function drawRadialVis(){
         .attr("dx", function(d) { return d.x < 180 ? 0 : 0; })
         .attr("dy", 5)
         .attr("angle", function(d) { return d.x - startDegrees; })
-        .attr("text-anchor", function(d) { return (d.x + 90 - startDegrees) < 180 ? "start" : "end"; })
-        .attr("transform", function(d) { return (d.x + 90 - startDegrees) < 180 ? null : "rotate(180)"; })
+        .attr("text-anchor", function(d) { return (d.x < 90 || d.x > 270) ? "start" : "end"; })
+        .attr("transform", function(d) { return (d.x < 90 || d.x > 270) ? null : "rotate(180)"; })
         .text(function(d) { return d.name; })
         .attr("id", function(d){
             return 'nodetext-' + d.className
@@ -474,9 +465,11 @@ function setGenePopupPosition(e){
     var a = e.target.attributes["angle"].value;
     var a = a * Math.PI / 180;
 
+    var radialDiv = d3.select('#radialViz');
+    var radialWidth = (radialDiv.style('width') || radialDiv.attr('width')).replace('px','');
     // Center position of the radial vis
-    var cY = $("#radialViz").offset().top + radius - 150 + 530;
-    var cX = $("#radialViz").offset().left + radius + 75;
+    var cY = $("#radialViz").offset().top + radius - 150;
+    var cX = radialWidth/2;
 
     // Subtract midpoints, so that midpoint is translated to origin
     // and add it in the end again
@@ -524,7 +517,7 @@ function addNodeToVis(added){
   //  startDegrees = 45 * (geneMap.children.length - 2);
 
     // Update the geneCluster so that we have a radial vis with quadrants missing.
-    geneCluster.size([availDegrees, innerRadius]);
+    //geneCluster.size([availDegrees, innerRadius]);
 }
 
 function removeNodeFromVis(remove) {
@@ -537,13 +530,24 @@ function removeNodeFromVis(remove) {
     //startDegrees = 45 * (geneMap.children.length - 2);
 
     // Update the geneCluster so that we have a radial vis with quadrants missing.
-    geneCluster.size([availDegrees, innerRadius]);
+    //geneCluster.size([availDegrees, innerRadius]);
 }
 /**
  * Initialize the Radial Vis by clearing the geneMap that contains the tree layout for the species
  * and their interconnected genes.
  */
 function initializeRadialVis() {
+    var radialDiv = d3.select("#radialViz");
+    var radialWidth = (radialDiv.style('width') || radialDiv.attr('width')).replace('px','');
+
+    radialSvg = radialDiv.append("svg")
+        .attr('width', radialWidth)
+        .attr("height", diameter + padding)
+        .append("g")
+        .attr("transform", "translate(" + (radialWidth / 2) + "," + (radius - padding/2) + ")");
+
+    svgDefs = radialSvg.append("svg:defs");
+
     geneBundle = d3.layout.bundle();
     gradientCounter = 0;
 
