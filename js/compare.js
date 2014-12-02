@@ -50,11 +50,12 @@ var width = 800 - margin.left - margin.right,
 
 var maxLength = 0,
     zMin = 1,
-    zMax = 100;
+    zMax = 100,
+    scale0 = 1;
 
 var xScale = d3.scale.linear()
     .domain([0, maxLength])
-    .range([0, sequenceWidth - (labelWidth * 0.1)]);
+    .range([0, sequenceWidth]);
 
 var zoom = d3.behavior.zoom();
 
@@ -83,15 +84,14 @@ function initComponents(){
     width = (compareDiv.style('width') || compareDiv.attr('width')).replace('px','') - margin.left - margin.right;
     height = 250 - margin.top - margin.bottom;
     labelWidth = width * 0.2;
-    sequenceWidth = (width * 0.8) - (labelWidth * 0.2)
+    sequenceWidth = (width * 0.8);
 
     labelGroup = d3.select("#compareViz").append('svg')
         .attr('class', 'compare-group-label')
         .style('width', labelWidth)
         .style('height', height)
         .attr('x',margin.left)
-        .attr('y',margin.top)
-        .style("background","#777777");
+        .attr('y',margin.top);
         //.attr('transform', 'translate('+margin.left+','+margin.top+')');
 
     sequenceGroup = d3.select("#compareViz").append('svg')
@@ -100,36 +100,57 @@ function initComponents(){
         .style('height', height)
         .attr('x',margin.left+labelWidth)
         .attr('y',margin.top)
-        .style("background","#777777")
-        //.attr('transform', 'translate('+(margin.left+labelWidth)+','+margin.top+')')
         .call(zoom)
         .on("dblclick.zoom", null);
 }
 
 function processGeneData(genes){
-    // Loop through the sequences get the max length
-    genes.forEach(function(g){
-        maxLength = g.length > maxLength ? g.length : maxLength;
+    var compare = [];
+
+    genes.forEach(function(g,i){
         // Make the sequence into a char array and keep reference in compareSequence property
         // Don't want to change the original gene sequence
         g.compareSequence = g.sequence.split('');
+
+        maxLength = g.compareSequence.length > maxLength ? g.compareSequence.length : maxLength;
     });
 
     // Re-loop through the sequence to now add z values
     genes.forEach(function(g){
-        var extra = maxLength - g.length;
+        var extra = maxLength - g.compareSequence.length;
         g.compareSequence = g.compareSequence.concat(new Array(extra).fill('Z'));
+        g.compareColor = new Array(maxLength).fill('#999');
+        g.compareSequence.forEach(function(p,j){
+            if(!compare[j]){
+                compare[j] = p;
+            } else {
+                compare[j] = compare[j] + p;
+            }
+        });
+    });
+
+    var count = genes.length;
+    var regex = new RegExp('G{'+count+'}|T{'+count+'}|C{'+count+'}|A{'+count+'}');
+    compare.forEach(function(c,i){
+        genes.forEach(function(g){
+            if(regex.test(c)){
+                g.compareColor[i] = '#EEE';
+            } else {
+            }
+        });
     });
 
     // Update the scale
     xScale.domain([0, maxLength])
-        .range([0, sequenceWidth - (labelWidth * 0.1)]);
+        .range([0, sequenceWidth]);
 
-    zMax = Math.round(peptideWidth / ((sequenceWidth - (labelWidth * 0.1))/maxLength));
+    zMax = Math.round(peptideWidth / (sequenceWidth/maxLength));
     console.log('zMax = '+zMax);
     zoom.x(xScale)
         .scaleExtent([zMin,zMax])
         .on("zoom", zoomCompare);
+
+    scale0 = xScale(1) - xScale(0);
 }
 
 function drawCompareVis(genes) {
@@ -172,20 +193,19 @@ function drawCompareVis(genes) {
     // Grab all peptide rows displayed
     var peptideRows = sequenceGroup.selectAll(".compare-peptide-row").data(genes, function(d){return d.className;});
 
-    // Get the current width scaled
-    var pWidth = xScale(1) - xScale(0);
-
     // For new peptides add them
     var peptideRowsEnter = peptideRows.enter().append('g')
         .attr('class', function (d) {return 'compare-peptide-row ' + d.className + '-peptide-row';})
         .attr('width', sequenceWidth)
         .attr('transform', function (d, i) {
-            return 'translate(0,' + (i * rowOffset) + ') scale(' + pWidth + ',1)';
+            return 'translate(0,' + (i * rowOffset) + ') scale(' + scale0 + ',1)';
         });
 
     // Grab all peptides in each row
     peptideRows.each(function (g) {
-        var peptides = peptideRows.selectAll('.compare-peptide').data(function(d){return d.compareSequence;},
+        var peptides = peptideRows.selectAll('.compare-peptide').data(function(d){
+                console.log(d.compareSequence.length);
+                return d.compareSequence;},
             function (d, i) {return g.className + '-' + i;});
 
         var peptidesEnter = peptides.enter().append('g')
@@ -199,7 +219,7 @@ function drawCompareVis(genes) {
             .attr('class', 'compare-peptide-rect')
             .attr('width', 1)
             .attr('height', 15)
-            .attr('fill', '#FFFFFF');
+            .attr('fill', function(d,i){return g.compareColor[i];});
 
         // Add the blank text for now
         peptidesEnter.append('text')
@@ -213,22 +233,39 @@ function drawCompareVis(genes) {
 }
 
 function zoomCompare() {
-    // Get the current width scaled
-    var pWidth = xScale(1) - xScale(0);
+    // Get the current scales to be used
+    // Need the inverted scale to have the text look normal
+    var newScale= scale0 * d3.event.scale,
+        iNewScale = 1/newScale;
+
+    var xMax = sequenceWidth - newScale * maxLength + 1;
+
+    var tx = Math.min(d3.event.translate[0],0);
+    tx = Math.max(tx, xMax);
+
+    console.log('translate = ' + d3.event.translate[0]);
+
+    if(tx == xMax) {
+        zoom.translate([xMax, 0]);
+    }
+
+    console.log('xMax = '+ xMax);
+
+    console.log('tx = '+ tx);
 
     // Grab the peptide rows - don't need to do anything with them
     var peptideRows = sequenceGroup.selectAll(".compare-peptide-row").data(cGenes, function(d){return d.className});
 
-    peptideRows.attr('transform', function(d,i){return 'translate('+ d3.event.translate[0] +','+ (i * rowOffset) + ') scale('+ d3.event.scale + ','+ 1 +')';});
+    peptideRows.attr('transform', function(d,i){return 'translate('+ tx +','+ (i * rowOffset) + ') scale('+ newScale + ',1)';});
 
     // Grab all peptides in each row
     peptideRows.each(function(g){
         var peptides = peptideRows.selectAll('.compare-peptide').data(function(d){return d.compareSequence;}, function(d,i){return g.className + '-' + i;});
         var peptidesText = peptides.select('text');
 
-        if(pWidth > 10){
+        if(newScale > 10){
             peptidesText.text(function(d){return (d != 'Z' ? d : '')})
-                .attr('transform','translate(0.5) scale('+ 1 / d3.event.scale + ','+ 1 +')');
+                .attr('transform','translate(0.5) scale('+ iNewScale + ',1)');
         } else {
             // Remove the text from the element
             peptidesText.text('');
