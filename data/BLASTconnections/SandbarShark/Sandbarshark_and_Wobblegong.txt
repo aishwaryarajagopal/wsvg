@@ -1,0 +1,13 @@
+sandbarshark_ATP6,wobblegong_ATP6,639
+sandbarshark_ATP8,wobblegong_ATP8,131
+sandbarshark_COX1,wobblegong_COX1,1777
+sandbarshark_COX2,wobblegong_COX2,854
+sandbarshark_COX3,wobblegong_COX3,903
+sandbarshark_CYTB,wobblegong_CYTB,1062
+sandbarshark_ND1,wobblegong_ND1,948
+sandbarshark_ND2,wobblegong_ND2,880
+sandbarshark_ND3,wobblegong_ND3,360
+sandbarshark_ND4,wobblegong_ND4,1064
+sandbarshark_ND4L,wobblegong_ND4L,188
+sandbarshark_ND5,wobblegong_ND5,1723
+sandbarshark_ND6,wobblegong_ND6,448

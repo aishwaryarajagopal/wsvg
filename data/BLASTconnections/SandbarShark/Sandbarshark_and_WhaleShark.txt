@@ -1,0 +1,15 @@
+sandbarshark_ATP6,whaleshark_ATP6,624
+sandbarshark_ATP8,whaleshark_ATP8,123
+sandbarshark_COX1,whaleshark_COX1,1723
+sandbarshark_COX2,whaleshark_COX2,818
+sandbarshark_COX3,whaleshark_COX3,883
+sandbarshark_CYTB,whaleshark_CYTB,1107
+sandbarshark_ND2,whaleshark_ND2,915
+sandbarshark_ND3,whaleshark_ND3,297
+sandbarshark_ND4,whaleshark_ND4,1154
+sandbarshark_ND4L,whaleshark_ND4L,239
+sandbarshark_ND5,whaleshark_ND5,1638
+sandbarshark_ND6,whaleshark_ND6,471
+
+
+

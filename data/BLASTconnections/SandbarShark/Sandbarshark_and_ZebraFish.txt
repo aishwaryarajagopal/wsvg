@@ -1,0 +1,15 @@
+sandbarshark_ATP6,zebrafish_ATP6,378
+sandbarshark_ATP8,zebrafish_ATP8,80.6
+sandbarshark_COX1,zebrafish_CO1,1363
+sandbarshark_COX2,zebrafish_CO2,589
+sandbarshark_COX3,zebrafish_CO3,627
+sandbarshark_CYTB,zebrafish_CYB,733
+sandbarshark_ND1,zebrafish_ND1,455
+sandbarshark_ND2,zebrafish_ND2,334
+sandbarshark_ND3,zebrafish_ND3,194
+sandbarshark_ND4,zebrafish_ND4,632
+sandbarshark_ND4L,zebrafish_ND4,21.1
+sandbarshark_ND4L,zebrafish_ND2,21.1
+sandbarshark_ND4L,zebrafish_ND5,21.1
+sandbarshark_ND5,zebrafish_ND5,708
+sandbarshark_ND6,zebrafish_ND6,164
