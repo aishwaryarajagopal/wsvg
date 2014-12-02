@@ -368,3 +368,18 @@ body {
 #circle-chart-container {
     position: relative;
 }
+
+.compare-label-rect {
+    rx: 20px;
+    ry: 20px;
+    height: 20px;
+    fill: #006;
+    stroke: #006;
+    stroke-width: 3px;
+}
+
+.compare-label-text {
+    text-anchor: middle;
+    font-size: 12px;
+    fill: #FFF;
+}

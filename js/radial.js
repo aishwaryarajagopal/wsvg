@@ -29,7 +29,7 @@ var selectValues = ["undefined","undefined","undefined","undefined"];
 var diameter = 640,
     radius = 940 / 2,
     innerRadius = radius - 270,
-    padding = 240,
+    padding = 80,
     availDegrees = 360,
     startDegrees = 0;
 
@@ -396,14 +396,13 @@ function showGeneConnections(d) {
 function showGeneComparison(d) {
     var genes = [d];
     d.connectedNodes.forEach(function(n){
-        // TODO HACK need a better way to check if they're in the vis
         geneMap.children.forEach(function(s){
             if(n.parent == s) {
                 genes.push(n);
             }
         })
     });
-    geneCompare(genes);
+    compareGenes(genes);
 }
 
 function hideGeneConnections(d) {
@@ -544,7 +543,7 @@ function initializeRadialVis() {
         .attr('width', radialWidth)
         .attr("height", diameter + padding)
         .append("g")
-        .attr("transform", "translate(" + (radialWidth / 2) + "," + (radius - padding/2) + ")");
+        .attr("transform", "translate(" + (radialWidth / 2) + "," + ((diameter + padding)/2) + ")");
 
     svgDefs = radialSvg.append("svg:defs");
 

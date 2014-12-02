@@ -11,9 +11,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- CSS that came w/ radial vis -->
     <link href="css/guardian.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="http://pasteup.guim.co.uk/0.0.3/css/pasteup.min.css">
-
-    <script src='js/comparemap.js'></script>  
+    <!--<link rel="stylesheet" type="text/css" href="http://pasteup.guim.co.uk/0.0.3/css/pasteup.min.css">-->
     <link rel="stylesheet" type="text/css" href="css/tooltip.css">
 
     <!-- Custom CSS -->
@@ -37,8 +35,8 @@
     }
     </style>
 
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <!--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+    <!--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
 
 </head>
 <body>
@@ -131,6 +129,12 @@
 
             <!-- main javascript for the website -->
             <script src="js/radial.js"></script>
+
+            <!-- script for displaying the compare viz-->
+            <script src='js/compare.js'></script>
+
+            <!-- script for displaying the compare viz-->
+            <!--<script src='js/comparemap.js'></script>-->
 
             <script id="geneTemplate" type="text/x-jquery-tmpl">
                 <div id='node-name'>${speciesName}</div>
@@ -265,7 +269,7 @@ $(document).ready(function(){
     buildNewickNodes(myNewick)
     d3.phylogram.build('#treeViz', myNewick, {
               //width: 1000,
-              height: 500
+              height: 300
             });
 });
 
@@ -290,7 +294,7 @@ function updatePhyloLabels(){
 
     d3.phylogram.build('#treeViz', myNewick, {
       //width: 1000,
-      height: 500
+      height: 300
     });
 }
 
