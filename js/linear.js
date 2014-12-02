@@ -3,7 +3,8 @@ function loadLightBox(gene) {
     console.log(gene);
 
     document.getElementById("myModalLabel").innerHTML = gene.className;
-    document.getElementById("myModalFooter").innerHTML = gene.desc;
+    var desc = gene.desc;
+    document.getElementById("myModalFooter").innerHTML = desc.substring(0, desc.indexOf(","));
 
     var dataset = [];
 
@@ -50,7 +51,7 @@ function loadLightBox(gene) {
                         .enter()
                         .append("g")
                         .attr("transform", function(datum, index){
-                            return "translate(" + x(index) + "," + 20 + ")"
+                            return "translate(" + x(index) + "," + 0 + ")"
                         })
                         .attr("class","bar")
                         .style('cursor',"url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur) 4 4, move")
@@ -62,16 +63,16 @@ function loadLightBox(gene) {
                             g.append("rect")
                                 .attr("class","rect")
                                 .attr("width",width)
-                                .attr("height", "20px")
+                                .attr("height", "40px")
                                 .style("fill",function(d){
                                     if (d == "A")
-                                        return "#0000FF";
+                                        return "#31a354"; //Green
                                     else if (d == "G")
-                                        return "#00FF00";
+                                        return "#2c7fb8"; //Blue
                                     else if (d=="T")
-                                        return "#FFFF00";
+                                        return "#fbff06"; //Yellow
                                     else
-                                        return "#FF0000"; 
+                                        return "#f03b20"; //Red
                                 })
                                 .style("stroke",function(d){
                                     return "black";
@@ -96,7 +97,7 @@ function loadLightBox(gene) {
 
                                     div.html("<strong> "+desc+"<BR>Position : "+(gene.startIndex + index)+"</strong>")
                                     .style("left", (d3.event.pageX)-365 + "px")     
-                                    .style("top", (20) + "px");    
+                                    .style("top", (2) + "px");    
                                 })
                                 .on("mouseout", function(d) {
                                     div.transition()        
@@ -113,7 +114,7 @@ function loadLightBox(gene) {
 
         linear_svg.selectAll(".bar")
                 .attr('transform',function(datum, index){
-                    return "translate(" +  Math.min(index*width, x(index)) + "," + 20+ ")"
+                    return "translate(" +  Math.min(index*width, x(index)) + "," + 0+ ")"
                 });
         linear_svg.selectAll('text').remove();
         linear_svg.selectAll(".rect")
@@ -127,11 +128,18 @@ function loadLightBox(gene) {
                         console.log(g)
                         g.append("text")
                         .attr("text-anchor","middle")
-                        .attr("y", "13")
+                        .attr("y", function(d){
+                            if(width/2 >10){
+                                return 23 + (width * 0.5 * 0.2)
+                            }
+                            return 23;
+                        })
                         .attr("x", width/2)
-                        .style("font-size", "10")
+                        .style("font-size", function(d){
+                            return Math.max(10, width*0.5)
+                        })
                         .style("fill", "rgb(0, 0, 0)")
-                        .style("font-family","Calibri")
+                        .style("font-family","helvetica neue")
                         .text(datum);
                     }
                 });
