@@ -9,6 +9,11 @@ function listContainsEntryFor(organism){
   return 0;
 }
 
+function getDistances(organism){
+  if(organism=="Salt Water Crocodile"){
+    return "Harbor Seal, 0.59155063\nHumans, 0.61982245\nZebra Fish, 0.62179177\nGiant Trevally, 0.62125612";
+  }
+}
 
 if (!d3) { throw "d3 wasn't included!"};
 (function() {
@@ -143,7 +148,7 @@ if (!d3) { throw "d3 wasn't included!"};
           }
         })
         .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
-      
+
     d3.phylogram.styleTreeNodes(vis)
     
     if (!options.skipLabels) {
@@ -192,7 +197,11 @@ if (!d3) { throw "d3 wasn't included!"};
           .attr('font-size', '12px')
           .attr('fill', '#000000')
         .text(function(d) { return d.length; });
-        
+     
+        vis.selectAll("g.leaf.node")
+          .append("title") // THIS IS THE PROPERTY WHICH adds the TOOLTIP 
+         .text(function(d){return getDistances(d.name)});
+
     /*    vis.selectAll('g.leaf.node')
         .append("svg:image")
       .attr("xlink:href","icons/whaleshark.jpg")
@@ -202,7 +211,6 @@ if (!d3) { throw "d3 wasn't included!"};
       .attr("height", 16);*/
 
     }
-    
     return {tree: tree, vis: vis}
   }
 }());
