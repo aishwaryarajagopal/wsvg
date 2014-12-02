@@ -54,9 +54,9 @@ function loadLightBox(gene) {
                         })
                         .attr("class","bar")
                         .style('cursor',"url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur) 4 4, move")
+                        .style('stroke',"black")
                         .each(function(datum, index){
                             var g = d3.select(this);
-                            console.log("aish",g);
                             var width = (x(1) - x(0));
 
                             g.append("rect")
@@ -129,9 +129,9 @@ function loadLightBox(gene) {
                         .attr("text-anchor","middle")
                         .attr("y", "13")
                         .attr("x", width/2)
-                        .attr("font-size", "8")
-                        .attr("fill", "black !important;")
-                        .attr("style","font-family: Calibri")
+                        .style("font-size", "10")
+                        .style("fill", "rgb(0, 0, 0)")
+                        .style("font-family","Calibri")
                         .text(datum);
                     }
                 });
