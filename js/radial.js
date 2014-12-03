@@ -402,7 +402,12 @@ function showGeneComparison(d) {
             }
         })
     });
+
     compareGenes(genes);
+
+    $('html, body').animate({
+        scrollTop: $('#compareViz').offset().top
+    }, 500);
 }
 
 function hideGeneConnections(d) {
@@ -467,8 +472,8 @@ function setGenePopupPosition(e){
     var radialDiv = d3.select('#radialViz');
     var radialWidth = (radialDiv.style('width') || radialDiv.attr('width')).replace('px','');
     // Center position of the radial vis
-    var cY = $("#radialViz").offset().top + radius - 150;
-    var cX = radialWidth/2;
+    var cY = $("#radialViz").offset().top + radius - 100;
+    var cX = radialWidth/2 + 50;
 
     // Subtract midpoints, so that midpoint is translated to origin
     // and add it in the end again
