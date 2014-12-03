@@ -40,68 +40,67 @@
 
 </head>
 <body>
+    <div id="selection bar" class="col-md-12" align="center" style="background-color:gray;position:fixed;z-index:200;">
+    <select id="organism1" onchange="selectChange(1,this.value); updatePhyloLabels();">
+        <option value="undefined">Pick one...</option>
+        <option value="whaleshark">Whale Shark</option>
+        <option value="sandbarshark">Sandbar Shark</option>
+        <option value="blacktipreefshark">Blacktip Reef Shark</option>
+        <option value="giantgrouper">Giant Grouper</option>
+        <option value="gianttrevally">Giant Trevally</option>
+        <option value="humans">Humans</option>
+        <option value="saltwatercrocodile">Salt Water Crocodile</option>
+        <option value="wobblegong">Wobblegong</option>
+        <option value="zebrafish">Zebra Fish</option>
+        <option value="harborseal">Harbor Seal</option>
+    </select>
+    <select id="organism2" onchange="selectChange(2,this.value); updatePhyloLabels();">
+        <option value="undefined">Pick one...</option>
+        <option value="whaleshark">Whale Shark</option>
+        <option value="sandbarshark">Sandbar Shark</option>
+        <option value="blacktipreefshark">Blacktip Reef Shark</option>
+        <option value="giantgrouper">Giant Grouper</option>
+        <option value="gianttrevally">Giant Trevally</option>
+        <option value="humans">Humans</option>
+        <option value="saltwatercrocodile">Salt Water Crocodile</option>
+        <option value="wobblegong">Wobblegong</option>
+        <option value="zebrafish">Zebra Fish</option>
+        <option value="harborseal">Harbor Seal</option>
+    </select>
+    <select id="organism3" onchange="selectChange(3,this.value); updatePhyloLabels();">
+        <option value="undefined" selected>--</option>
+        <option value="whaleshark">Whale Shark</option>
+        <option value="sandbarshark">Sandbar Shark</option>
+        <option value="blacktipreefshark">Blacktip Reef Shark</option>
+        <option value="giantgrouper">Giant Grouper</option>
+        <option value="gianttrevally">Giant Trevally</option>
+        <option value="humans">Humans</option>
+        <option value="saltwatercrocodile">Salt Water Crocodile</option>
+        <option value="wobblegong">Wobblegong</option>
+        <option value="zebrafish">Zebra Fish</option>
+        <option value="harborseal">Harbor Seal</option>
+    </select>
+    <select id="organism4" onchange="selectChange(4,this.value); updatePhyloLabels();">
+        <option value="undefined" selected>--</option>
+        <option value="whaleshark">Whale Shark</option>
+        <option value="sandbarshark">Sandbar Shark</option>
+        <option value="blacktipreefshark">Blacktip Reef Shark</option>
+        <option value="giantgrouper">Giant Grouper</option>
+        <option value="gianttrevally">Giant Trevally</option>
+        <option value="humans">Humans</option>
+        <option value="saltwatercrocodile">Salt Water Crocodile</option>
+        <option value="wobblegong">Wobblegong</option>
+        <option value="zebrafish">Zebra Fish</option>
+        <option value="harborseal">Harbor Seal</option>
+    </select>
+
+    <!--<button onclick="updateRadialVis()">New Radial</button>-->
+    <!--<button onclick="updatePhyloLabels()">Visualize</button>-->
+</div>
     <div class="col-md-12" id="mainContent">
-        <div id="selection bar" align="center" style="background-color:gray;">
-            <select id="organism1" onchange="selectChange(1,this.value); updatePhyloLabels();">
-                <option value="undefined">Pick one...</option>
-                <option value="whaleshark">Whale Shark</option>
-                <option value="sandbarshark">Sandbar Shark</option>
-                <option value="blacktipreefshark">Blacktip Reef Shark</option>
-                <option value="giantgrouper">Giant Grouper</option>
-                <option value="gianttrevally">Giant Trevally</option>
-                <option value="humans">Humans</option>
-                <option value="saltwatercrocodile">Salt Water Crocodile</option>
-                <option value="wobblegong">Wobblegong</option>
-                <option value="zebrafish">Zebra Fish</option>
-                <option value="harborseal">Harbor Seal</option>
-            </select>
-            <select id="organism2" onchange="selectChange(2,this.value); updatePhyloLabels();">
-                <option value="undefined">Pick one...</option>
-                <option value="whaleshark">Whale Shark</option>
-                <option value="sandbarshark">Sandbar Shark</option>
-                <option value="blacktipreefshark">Blacktip Reef Shark</option>
-                <option value="giantgrouper">Giant Grouper</option>
-                <option value="gianttrevally">Giant Trevally</option>
-                <option value="humans">Humans</option>
-                <option value="saltwatercrocodile">Salt Water Crocodile</option>
-                <option value="wobblegong">Wobblegong</option>
-                <option value="zebrafish">Zebra Fish</option>
-                <option value="harborseal">Harbor Seal</option>
-            </select>
-            <select id="organism3" onchange="selectChange(3,this.value); updatePhyloLabels();">
-                <option value="undefined" selected>--</option>
-                <option value="whaleshark">Whale Shark</option>
-                <option value="sandbarshark">Sandbar Shark</option>
-                <option value="blacktipreefshark">Blacktip Reef Shark</option>
-                <option value="giantgrouper">Giant Grouper</option>
-                <option value="gianttrevally">Giant Trevally</option>
-                <option value="humans">Humans</option>
-                <option value="saltwatercrocodile">Salt Water Crocodile</option>
-                <option value="wobblegong">Wobblegong</option>
-                <option value="zebrafish">Zebra Fish</option>
-                <option value="harborseal">Harbor Seal</option>
-            </select>
-            <select id="organism4" onchange="selectChange(4,this.value); updatePhyloLabels();">
-                <option value="undefined" selected>--</option>
-                <option value="whaleshark">Whale Shark</option>
-                <option value="sandbarshark">Sandbar Shark</option>
-                <option value="blacktipreefshark">Blacktip Reef Shark</option>
-                <option value="giantgrouper">Giant Grouper</option>
-                <option value="gianttrevally">Giant Trevally</option>
-                <option value="humans">Humans</option>
-                <option value="saltwatercrocodile">Salt Water Crocodile</option>
-                <option value="wobblegong">Wobblegong</option>
-                <option value="zebrafish">Zebra Fish</option>
-                <option value="harborseal">Harbor Seal</option>
-            </select>
-
-            <!--<button onclick="updateRadialVis()">New Radial</button>-->
-            <!--<button onclick="updatePhyloLabels()">Visualize</button>-->
-        </div>
-
         <!-- Page Content -->
         <div class="container" style="width:100%">
-            <div align="right">
+            <div align="right" style="margin-top: 18px;">
             <span id="infoWikiShow" class="glyphicon glyphicon-info-sign" style="font-size:24px ;"></span>
             <span id="infoWikiHide" class="glyphicon glyphicon-remove-circle hide" style="font-size:24px ;"></span>
             </div>
@@ -148,11 +147,28 @@
                     <div class='node-data'>${geneName}</div>
                 </div>
             </script>
+            <script id="nucTemplate" type="text/x-jquery-tmpl">
+                <div id='node-name'>${speciesName}</div>
+                <div class='node-topic' id='node-gene-info'>
+                    <div class='node-label'>Gene Name</div>
+                    <div class='node-data'>${geneName}</div>
+                    <div class='node-label'>Gene Length</div>
+                    <div class='node-data-short'>${geneLength}</div>
+                </div>
+                <div class='node-topic' id='node-nucleotide0-info'>
+                    <div class='node-label'>${nucName}</div>
+                    <div class='node-data-color' style='background-color: ${color};'></div>
+                </div>
+                <div class='node-topic' id='node-nucleotide1-info'>
+                    <div class='node-label'>Index</div>
+                    <div class='node-data-short'>${location}</div>
+                </div>
+            </script>
         </div>
 
     </div><!--left col end-->
 
-    <div id="infoWiki" class="col-md-3 hide">
+    <div id="infoWiki" class="col-md-3 hide" style="margin-top: 18px;">
         <div class="panel-group" id="accordion1">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -384,6 +400,7 @@
 
     <!-- floating div for the popup for hover -->
     <div id='node-info' class='radial-popup'></div>
+    <div id='nucleotide-info' class='nuc-popup'></div>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

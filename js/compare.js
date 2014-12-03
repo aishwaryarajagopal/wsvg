@@ -11,6 +11,19 @@ var nucMap = {
     G: 'Guanine'
 };
 
+var speciesMap = {
+    "blacktipreefshark": 'Blacktip Reef Shark',
+    "giantgrouper": 'Giant Grouper',
+    "gianttrevally": 'Giant Trevally',
+    "harborseal": 'Harbor Seal',
+    "wobblegong": 'Wobblegong',
+    "humans": 'Humans',
+    "sandbarshark": 'Sandbar Shark',
+    "saltwatercrocodile": 'Salt Water Crocodile',
+    "whaleshark": 'Whale Shark',
+    "zebrafish": 'Zebra Fish'
+}
+
 var colorMap = {
     "blacktipreefshark": '#636363',
     "giantgrouper": '#C994C7',
@@ -37,10 +50,6 @@ var margin = {
     bottom: 30,
     right: 15
 };
-
-var compareTip = d3.select("body").append("div")
-    .attr("class", "d3-tip")
-    .style("opacity", 0);
 
 var width = 800 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom,
@@ -74,7 +83,6 @@ $(document).ready(function () {
 function compareGenes(genes){
     // Re initialize values for new genes
     maxLength = 0;
-
     cGenes = genes;
     processGeneData(genes);
     drawCompareVis(genes);
@@ -121,7 +129,7 @@ function processGeneData(genes){
     genes.forEach(function(g){
         var extra = maxLength - g.compareSequence.length;
         g.compareSequence = g.compareSequence.concat(new Array(extra).fill('Z'));
-        g.compareColor = new Array(maxLength).fill('#999');
+        g.compareColor = new Array(maxLength).fill('#BBB');
         g.compareSequence.forEach(function(p,j){
             if(!compare[j]){
                 compare[j] = p;
@@ -147,7 +155,6 @@ function processGeneData(genes){
         .range([0, sequenceWidth]);
 
     zMax = Math.round(nucWidth / (sequenceWidth/maxLength));
-    console.log('zMax = '+zMax);
     zoom.x(xScale)
         .scaleExtent([zMin,zMax])
         .on("zoom", zoomCompare);
@@ -206,8 +213,11 @@ function drawCompareVis(genes) {
             .attr('class', function (d, i) {return 'compare-nuc ' + g.className + '-' + i + '-nuc';})
             .attr('transform', function (d, i) {return 'translate(' + (i) + ','+ (rowHeight*0.05) +') ';})
             .on('mouseover', function(d,i){onCompareMouseOver(genes,d,i)})
-            .on("click", function(d,i){geneClick(genes,d,i)})
-            .on('mouseout', function(d,i){onCompareMouseOut(genes,d,i)});
+            .on("click", function(d,i){geneClick(g,d,i);})
+            .on('mouseout', function(d,i){
+                hideCompareTip();
+                onCompareMouseOut(genes,d,i);
+            });
 
         nucsEnter.append('rect')
             .attr('class', 'compare-nuc-rect')
@@ -267,42 +277,39 @@ function zoomCompare() {
     });
 }
 
-function geneClick(genes,d,i){
-
-    var nuc = nucMap[d.value];
-
-    genes.forEach(function(g){
-        var column = d3.selectAll('.' + g.className + '-'+ i + '-nuc');
-        column.select('rect')
-            .attr('stroke', '#000')
-            .attr('stroke-width', 0.05);
-    });
-
-    if(d.value!='Z')
+function geneClick(g,d,i){
+    if(d!='Z')
     {
-        compareTip.transition().duration(200)
-            .style("opacity", .9);
-        if(d.rowCount==0)
-        {
-            compareTip.html("<strong>Gene:</strong> <span style='color:#008AB8'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:#008AB8'>" + d.count + "</span><br><strong>Base Species:</strong> <span style='color:#008AB8'>" + d.name + "</span><br><strong>Base Nucleotide:</strong> <span style='color:#008AB8'>" + geneName + "</span>")
-                .style("left", (d3.event.pageX+20) + "px")
-                .style("top", (d3.event.pageY - 120) + "px");
-        }
-        else
-        {
-            compareTip.html("<strong>Gene:</strong> <span style='color:#008AB8'>" + d.gene + "</span><br><strong>Position:</strong> <span style='color:#008AB8'>" + d.count + "</span><br><strong>Species:</strong> <span style='color:#008AB8'>" + d.name + "</span><br><strong>Nucleotide:</strong> <span style='color:#008AB8'>" + geneName + "</span><br><strong>Base Species:</strong> <span style='color:#008AB8'>" + d.baseSpecies + "</span><br><strong>Base Nucleotide:</strong> <span style='color:#008AB8'>" + basegeneName + "</span>")
-                .style("left", (d3.event.pageX+20) + "px")
-                .style("top", (d3.event.pageY - 120) + "px");
-        }
 
+        var pop = $("#nucleotide-info");
+        pop.empty()
+
+        $("#nucTemplate").tmpl( {
+            speciesName: speciesMap[g.speciesClass],
+            geneName: g.name,
+            nucName: nucMap[d],
+            location: (g.startIndex + i),
+            geneLength: g.length,
+            color: nucColorMap[d]
+        }).appendTo( "#nucleotide-info" );
+
+        var left    = d3.event.pageX + pop.outerWidth()/4;
+        // If it will reach outside of the window then bring it back to the left
+        left = ((left + pop.outerWidth()) > $(window).outerWidth()) ? left - pop.outerWidth() * 3 / 2 : left;
+        var top   = d3.event.pageY - $("#nucleotide-info").outerHeight()/2;
+
+        $("#nucleotide-info").css({
+            top: top,
+            left: left
+        });
+
+        $("#nucleotide-info").show();
     }
 
 }
 
 function hideCompareTip(){
-    compareTip.transition()
-        .duration(200)
-        .style("opacity", 0);
+    $("#nucleotide-info").hide();
 }
 
 function onCompareMouseOut(genes,d,i){

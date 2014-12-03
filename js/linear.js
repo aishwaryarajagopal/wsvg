@@ -96,7 +96,7 @@ function loadLightBox(gene) {
                                     .style("opacity", .9);      
 
                                     div.html("<strong> "+desc+"<BR>Position : "+(gene.startIndex + index)+"</strong>")
-                                    .style("left", (d3.event.pageX)-365 + "px")     
+                                    .style("left", (d3.event.pageX)-465 + "px")
                                     .style("top", (2) + "px");    
                                 })
                                 .on("mouseout", function(d) {

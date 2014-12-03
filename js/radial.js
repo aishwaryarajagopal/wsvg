@@ -20,6 +20,19 @@ var colorMap = {
     "zebrafish": "#31A354"
 };
 
+var speciesMap = {
+    "blacktipreefshark": 'Blacktip Reef Shark',
+    "giantgrouper": 'Giant Grouper',
+    "gianttrevally": 'Giant Trevally',
+    "harborseal": 'Harbor Seal',
+    "wobblegong": 'Wobblegong',
+    "humans": 'Humans',
+    "sandbarshark": 'Sandbar Shark',
+    "saltwatercrocodile": 'Salt Water Crocodile',
+    "whaleshark": 'Whale Shark',
+    "zebrafish": 'Zebra Fish'
+}
+
 var species = [];
 var classMap = {};
 var geneLinks = [];
@@ -185,40 +198,76 @@ function drawRadialVis(){
         }
     }
 
-    var icons = radialSvg.selectAll('.icon')
+    var orgs = radialSvg.selectAll('.org-node')
         .data(nodes.filter(function(n) { return n.depth == 1; }), function(d){return d.className;});
 
-    // Transition the genes to their position
-    icons.transition().duration(moveTime)
-        .attr('y', function(d){
+    orgs.transition().duration(moveTime)
+        .attr('transform', function(d){
             var y = 325 * Math.sin((d.x - startDegrees) * Math.PI /180);
-            return y - 50;
-        })
-        .attr('x', function(d){
             var x = 325 * Math.cos((d.x - startDegrees) * Math.PI /180);
-            return x - 50;
+            return 'translate('+(x-50)+','+(y-50)+')';
         });
 
-    // Add new genes - transition fade in
-    icons.enter().append("image")
+    var orgsEnter = orgs.enter().append('g')
+        .attr('class', function(d){ return 'org-node org-node-'+ d.className;})
+        .attr('transform', function(d){
+            var y = 325 * Math.sin((d.x - startDegrees) * Math.PI /180);
+            var x = 325 * Math.cos((d.x - startDegrees) * Math.PI /180);
+            return 'translate('+(x-50)+','+(y-50)+')';
+        });
+
+    orgsEnter.append("image")
         .attr('class', function(d){ return 'icon ' + 'icon-'+ d.className; })
         .attr('height', 100)
         .attr('width', 100)
-        .attr('y', function(d){
-            var y = 325 * Math.sin((d.x - startDegrees) * Math.PI / 180);
-            return y - 50;
-        })
-        .attr('x', function(d){
-            var x = 325 * Math.cos((d.x - startDegrees) * Math.PI / 180);
-            return x - 50;
-        })
-        .attr('xlink:href', function(d) { return 'icons/' + d.className + ".png"; })
-        .style("opacity", 0)
+        .attr('xlink:href', function(d) { return 'icons/' + d.className + ".png"; });
+
+    orgsEnter.append('text')
+        .style('text-anchor','middle')
+        .style('font-size','15px')
+        .attr('x', 50)
+        .attr('fill', function(d){ return colorMap[d.className];})
+        .text(function(d){return speciesMap[d.className];});
+
+    orgsEnter.style("opacity", 0)
         .transition().duration(enterTime)
-        .style("opacity", 1);
+        .style("opacity", 1)
+
+
+    //var icons = radialSvg.selectAll('.icon')
+    //    .data(nodes.filter(function(n) { return n.depth == 1; }), function(d){return d.className;});
+    //
+    //// Transition the genes to their position
+    //icons.transition().duration(moveTime)
+    //    .attr('y', function(d){
+    //        var y = 325 * Math.sin((d.x - startDegrees) * Math.PI /180);
+    //        return y - 50;
+    //    })
+    //    .attr('x', function(d){
+    //        var x = 325 * Math.cos((d.x - startDegrees) * Math.PI /180);
+    //        return x - 50;
+    //    });
+
+    //// Add new genes - transition fade in
+    //icons.enter().append("image")
+    //    .attr('class', function(d){ return 'icon ' + 'icon-'+ d.className; })
+    //    .attr('height', 100)
+    //    .attr('width', 100)
+    //    .attr('y', function(d){
+    //        var y = 325 * Math.sin((d.x - startDegrees) * Math.PI / 180);
+    //        return y - 50;
+    //    })
+    //    .attr('x', function(d){
+    //        var x = 325 * Math.cos((d.x - startDegrees) * Math.PI / 180);
+    //        return x - 50;
+    //    })
+    //    .attr('xlink:href', function(d) { return 'icons/' + d.className + ".png"; })
+    //    .style("opacity", 0)
+    //    .transition().duration(enterTime)
+    //    .style("opacity", 1);
 
     // Remove genes that have been removed - fade out
-    icons.exit().transition().duration(exitTime)
+    orgs.exit().transition().duration(exitTime)
         .style("opacity",0)
         .remove();
 
@@ -412,7 +461,7 @@ function showGeneConnections(d) {
     $("#node-info").empty()
 
     $("#geneTemplate").tmpl( {
-        speciesName: d.speciesClass,
+        speciesName: speciesMap[d.speciesClass],
         length: d.length,
         geneName: d.name,
         color: getGeneColor(d.speciesClass, d.length)
@@ -510,7 +559,7 @@ function setGenePopupPosition(e){
         yr = (radius - 100) * Math.sin(a) + cY;
 
     var nTop    = yr - $("#node-info").outerHeight()/2;
-    var nLeft   = xr - $("#node-info").outerWidth()/2;
+    var nLeft   = xr - $("#node-info").outerWidth()/4;
 
     $('.radial-popup').css({
         top: nTop,
