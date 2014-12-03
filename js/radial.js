@@ -59,7 +59,7 @@ var maxGeneLength = 0,
 
 // On document ready, process the json file
 $(document).ready(function () {
-    d3.json("data.json", processGenomeData);
+    d3.json('data/data.json', processGenomeData);
 });
 
 /**
@@ -67,7 +67,6 @@ $(document).ready(function () {
  * @param data - json formatted data
  */
 function processGenomeData(data) {
-    // Grab the json object and point to it
     species = data;
 
     // Go through each species and make a link within each gene to the species that have that same gene
@@ -107,14 +106,44 @@ function processGenomeData(data) {
             }
         });
     });
+    d3.json('data/links.json', processLinks)
+}
 
+function processLinks(datum){
+    var connections = datum;
+    species.forEach(function(s){
+        s.links.forEach(function(l){
+            var class0 = l.source.className;
+            var class1 = l.target.className;
+            if(connections[class0] && connections[class0] == class1){
+                delete connections[class0];
+            }
+        });
+    });
+
+    species.forEach(function(s,i){
+        s.genes.forEach(function(g,j){
+            var c = connections[g.className];
+            if(c){
+                var split = c.split('_');
+                var o = classMap[split[0]];
+                o.genes.forEach(function(oG){
+                    if(oG.name.toLowerCase() == split[1]){
+                        var link = {type: s.name+"-"+ o.name+"-link", source: g, target: oG};
+                        g.connectedNodes.push(oG);
+                        s.links.push(link);
+                    }
+                });
+            }
+        });
+    });
     updateRadialVis();
 }
 
 function updateRadialVis() {
     initializeRadialVis();
     //addNodeToVis("whaleshark");
-    drawEmptyVis();
+    //drawEmptyVis();
     drawRadialVis();
 }
 
@@ -221,7 +250,7 @@ function drawRadialVis(){
         .style("stroke", function(d){
             return 'url(#' + getGeneGradient(d[0]["x"] - startDegrees, d[4]["x"] - startDegrees, d[0]["speciesClass"], d[4]["speciesClass"], d[0]["className"], d[4]["className"]) +')'
         })
-        .transition().duration(enterTime * 4)
+        .transition().duration(enterTime * 2)
         .style("opacity",1);
 
     // Remove old links - transition fade out
