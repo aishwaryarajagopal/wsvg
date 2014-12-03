@@ -383,3 +383,8 @@ body {
     font-size: 12px;
     fill: #FFF;
 }
+
+.peptide-highlight {
+    stroke: #000;
+    stroke-width: 0.05;
+}

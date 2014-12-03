@@ -11,6 +11,19 @@ var peptideMap = {
     G: 'Guanine'
 };
 
+var colorMap = {
+    "blacktipreefshark": '#636363',
+    "giantgrouper": '#C994C7',
+    "gianttrevally": "#756BB1",
+    "harborseal": "#DD1C77",
+    "wobblegong": "#99D8C9",
+    "humans": "#FC9272",
+    "sandbarshark": "#9EBCDA",
+    "saltwatercrocodile": "#FEC44F",
+    "whaleshark": "#1C9099",
+    "zebrafish": "#31A354"
+};
+
 var peptideColorMap = {
     AC: '#5CBDFF',
     AG: '#99D6FF',
@@ -174,7 +187,7 @@ function drawCompareVis(genes) {
         .attr('rx', 5)
         .attr('width', labelWidth * 0.8)
         .attr('height', 14)
-        .style('fill', '#000066')
+        .style('fill', function(d){ return colorMap[d.speciesClass]})
         .style('opacity', 1);
 
     labelsEnter.append('text')
@@ -210,22 +223,24 @@ function drawCompareVis(genes) {
 
         var peptidesEnter = peptides.enter().append('g')
             .attr('class', function (d, i) {return 'compare-peptide ' + g.className + '-' + i + '-peptide';})
-            .attr('transform', function (d, i) {return 'translate(' + i + ') ';})
-            //.on('mouseover', function(d){onCompareMouseOver(this,d)})
-            .on("click", geneClick)
-            .on('mouseout', hideCompareTip());
+            .attr('transform', function (d, i) {return 'translate(' + (i) + ') ';})
+            .on('mouseover', function(d,i){onCompareMouseOver(genes,d,i)})
+            .on("click", function(d,i){geneClick(genes,d,i)})
+            .on('mouseout', function(d,i){onCompareMouseOut(genes,d,i)});
 
         peptidesEnter.append('rect')
             .attr('class', 'compare-peptide-rect')
-            .attr('width', 1)
+            .attr('width', 0.95)
             .attr('height', 15)
+            .attr('stroke', function(d,i){return g.compareColor[i];})
+            .attr('stroke-width', 0.05)
             .attr('fill', function(d,i){return g.compareColor[i];});
 
         // Add the blank text for now
         peptidesEnter.append('text')
             .attr('class', 'compare-peptide-text')
             .attr('y', 11)
-            .attr('transform', 'translate(0.5)')
+            .attr('transform', 'translate(0.45)')
             .style('text-anchor', 'middle')
             .style('font-size', 8)
             .style('fill', '#000000');
@@ -273,10 +288,17 @@ function zoomCompare() {
     });
 }
 
-function geneClick(d){
+function geneClick(genes,d,i){
 
     var peptide = peptideMap[d.value];
     var basePeptide = peptideMap[d.baseGene];
+
+    genes.forEach(function(g){
+        var column = d3.selectAll('.' + g.className + '-'+ i + '-peptide');
+        column.select('rect')
+            .attr('stroke', '#000')
+            .attr('stroke-width', 0.05);
+    });
 
     if(d.value!='Z')
     {
@@ -305,10 +327,18 @@ function hideCompareTip(){
         .style("opacity", 0);
 }
 
-function onCompareMouseOver(g,d){
-    g.select('rect')
-        .attr('stroke', ((d.value != 'Z') ? '#E65C00' : null))
-        .attr('stroke-width', ((d.value != 'Z') ? (xScale(1) - xScale(0))/10 : null));
+function onCompareMouseOut(genes,d,i){
+    genes.forEach(function(g){
+        var column = d3.selectAll('.' + g.className + '-'+ i + '-peptide');
+        column.select('rect').classed('peptide-highlight', false);
+    });
+}
+
+function onCompareMouseOver(genes,d,i){
+    genes.forEach(function(g){
+        var column = d3.selectAll('.' + g.className + '-'+ i + '-peptide');
+        column.select('rect').classed('peptide-highlight', true);
+    });
 }
 
 Array.prototype.fill = function(val){
