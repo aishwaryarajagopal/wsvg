@@ -172,6 +172,66 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title" align="center">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePhyloTree">
+                            <b>Phylogenetic Tree</b>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapsePhyloTree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p>A phylogenetic tree or evolutionary tree is a branching diagram or "tree" showing the inferred evolutionary relationships among various biological species or other entities—their phylogeny—based upon similarities and differences in their physical or genetic characteristics. The taxa joined together in the tree are implied to have descended from a common ancestor.</p>
+                        Wikipedia: <a href="http://en.wikipedia.org/wiki/Phylogenetic_tree">http://en.wikipedia.org/wiki/Phylogenetic_tree</a><br/>
+                        Viz. ref: <a href="http://www.jasondavies.com/tree-of-life/">http://www.jasondavies.com/tree-of-life/</a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title" align="center">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseRadialMap">
+                            <b>Radial Map</b>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseRadialMap" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p>This view allows users to pull in 2-4 organisms and get a complete overview of the genome for the organism. Bars represent genes and the links across organisms highlight the results of running BLAST across the available dataset.</p>
+                        BLAST   <a href="http://en.wikipedia.org/wiki/BLAST">http://en.wikipedia.org/wiki/BLAST</a><br/>
+                        Viz ref. <a href="http://www.theguardian.com/world/interactive/2013/apr/30/violence-guns-best-selling-video-games"> http://www.theguardian.com/world/interactive/2013/apr/30/violence-guns-best-selling-video-games</a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title" align="center">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseCompareMap">
+                            <b>Compare Map</b>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseCompareMap" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p>Allows users to focus on similar genes across organisms. Activated by clicking a gene (i.e. a bar) in the Radial Map.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title" align="center">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseRawView">
+                            <b>Raw View</b>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseRawView" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p>Gives the user an option to dive deep into a gene sequence and see what actually makes us and all organisms around us look the way we do! Activated by double clicking a bar in the radial map.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title" align="center">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
                             <b>Whale Shark</b>
                         </a>
@@ -319,64 +379,6 @@
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" align="center">
-                        <a  data-toggle="collapse" data-parent="#accordion" href="#collapsePhyloTree">
-                            <b>Phylo Tree</b>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapsePhyloTree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <p>Phylo Tree</p>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" align="center">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseRadialMap">
-                            <b>Radial Map</b>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseRadialMap" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <b>Radial Map</b>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" align="center">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseCompareMap">
-                            <b>Compare Map</b>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseCompareMap" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <b>Compare Map</b>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" align="center">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseRawView">
-                            <b>Raw View</b>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseRawView" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <b>Raw View</b>
-                    </div>
-                </div>
-            </div>
-
-
         </div><!--end of accordion1-->
     </div><!-- right col end-->
 
@@ -446,7 +448,7 @@ $(document).ready(function(){
     buildNewickNodes(myNewick)
     d3.phylogram.build('#treeViz', myNewick, {
               //width: 1000,
-              height: 300
+              height: 450
             });
 });
 
@@ -471,7 +473,7 @@ function updatePhyloLabels(){
 
     d3.phylogram.build('#treeViz', myNewick, {
       //width: 1000,
-      height: 300
+      height: 450
     });
 }
 
