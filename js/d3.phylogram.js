@@ -199,8 +199,46 @@ if (!d3) { throw "d3 wasn't included!"};
         .text(function(d) { return d.length; });
      
         vis.selectAll("g.leaf.node")
-          .append("title") // THIS IS THE PROPERTY WHICH adds the TOOLTIP 
+          .append("title")
          .text(function(d){return getDistances(d.name)});
+
+         /*
+         var tempArr=[];
+         var org1="Salt Water Crocodile",org2="Harbor Seal";
+         var sum=0;
+         for (var i=0;i<nodes.length;i++){
+          if(nodes[i]['name']!=""){
+          console.log(nodes[i]['name']);
+          }console.log(nodes[i]['length']);
+         }
+         
+         for (var i=0;i<nodes.length;i++){
+          if(nodes[i]['name']!=""){
+            if(nodes[i]['name']==org1){
+              console.log('1')
+              for(var j=i;j<nodes.length;j++){
+                console.log('2')
+                if(nodes[j]['name']==org2){
+                 break;
+                }
+                sum+=nodes[j]['length'];
+              }
+              break;
+            }if(nodes[i]['name']==org2){
+              console.log('1')
+              for(var j=i;j<nodes.length;j++){
+                console.log('2')
+                if(nodes[j]['name']==org1){
+                  break;
+                }
+                console.log("adding "+nodes[j]['length']);
+                sum+=nodes[j]['length'];
+              }
+              break;
+            }
+          }
+         }
+         console.log(sum);*/
 
     /*    vis.selectAll('g.leaf.node')
         .append("svg:image")
