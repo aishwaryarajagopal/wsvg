@@ -4,7 +4,7 @@
 
 var cGenes;
 
-var peptideMap = {
+var nucMap = {
     A: 'Adenine',
     C: 'Cytosine',
     T: 'Thiamine',
@@ -24,23 +24,11 @@ var colorMap = {
     "zebrafish": "#31A354"
 };
 
-var peptideColorMap = {
-    AC: '#5CBDFF',
-    AG: '#99D6FF',
-    AT: '#D6EFFF',
-    CA: '#47D147',
-    CG: '#70DB70',
-    CT: '#ADEBAD',
-    GA: '#FFFF4D',
-    GC: '#FFFF66',
-    GT: '#FFFFB2',
-    TA: '#FF6262',
-    TC: '#FF9696',
-    TG: '#FFB9B9',
-    ZA: '#0033CC',
-    ZC: '#0033CC',
-    ZG: '#FFCC00',
-    ZT: '#CC0000'
+var nucColorMap = {
+    A: '#28964A',
+    C: '#AD3222',
+    T: '#E8CC42',
+    G: '#235ABF'
 };
 
 var margin = {
@@ -58,8 +46,9 @@ var width = 800 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom,
     labelWidth = width * 0.2,
     sequenceWidth = (width * 0.8),
-    rowOffset = 30,
-    peptideWidth = 35;
+    rowOffset = 45,
+    rowHeight = 30,
+    nucWidth = 35;
 
 var maxLength = 0,
     zMin = 1,
@@ -157,7 +146,7 @@ function processGeneData(genes){
     xScale.domain([0, maxLength])
         .range([0, sequenceWidth]);
 
-    zMax = Math.round(peptideWidth / (sequenceWidth/maxLength));
+    zMax = Math.round(nucWidth / (sequenceWidth/maxLength));
     console.log('zMax = '+zMax);
     zoom.x(xScale)
         .scaleExtent([zMin,zMax])
@@ -183,67 +172,59 @@ function drawCompareVis(genes) {
 
     labelsEnter.append('rect')
         .attr('class', 'compare-label-rect1')
-        .attr('ry', 5)
-        .attr('rx', 5)
+        .attr('ry', Math.round(rowHeight*0.2))
+        .attr('rx', Math.round(rowHeight*0.2))
         .attr('width', labelWidth * 0.8)
-        .attr('height', 14)
+        .attr('height', rowHeight)
         .style('fill', function(d){ return colorMap[d.speciesClass]})
         .style('opacity', 1);
 
     labelsEnter.append('text')
         .attr('class', 'compare-label-text')
-        .attr('y', 11)
+        .attr('y', (rowHeight/2) + 5)
         .attr('x', labelWidth * 0.4)
         .attr('width', labelWidth * 0.8)
-        .attr('height', 14)
-        .text(function (d) {
-            return d.className;
-        });
+        .attr('height', rowHeight)
+        .attr('text-anchor', 'middle')
+        .text(function (d) {return d.className;});
 
-    // Remove any labels that aren't used
+    // Grab all nuc rows displayed
+    var nucRows = sequenceGroup.selectAll(".compare-nuc-row").data(genes, function(d){return d.className;});
 
-
-    // Grab all peptide rows displayed
-    var peptideRows = sequenceGroup.selectAll(".compare-peptide-row").data(genes, function(d){return d.className;});
-
-    // For new peptides add them
-    var peptideRowsEnter = peptideRows.enter().append('g')
-        .attr('class', function (d) {return 'compare-peptide-row ' + d.className + '-peptide-row';})
+    // For new nucs add them
+    var nucRowsEnter = nucRows.enter().append('g')
+        .attr('class', function (d) {return 'compare-nuc-row ' + d.className + '-nuc-row';})
         .attr('width', sequenceWidth)
-        .attr('transform', function (d, i) {
-            return 'translate(0,' + (i * rowOffset) + ') scale(' + scale0 + ',1)';
-        });
+        .attr('transform', function (d, i) {return 'translate(0,' + (i * rowOffset) + ') scale(' + scale0 + ',1)';});
 
-    // Grab all peptides in each row
-    peptideRows.each(function (g) {
-        var peptides = peptideRows.selectAll('.compare-peptide').data(function(d){
-                console.log(d.compareSequence.length);
-                return d.compareSequence;},
+    // Grab all nucs in each row
+    nucRows.each(function (g) {
+        var nucs = nucRows.selectAll('.compare-nuc').data(function(d){return d.compareSequence;},
             function (d, i) {return g.className + '-' + i;});
 
-        var peptidesEnter = peptides.enter().append('g')
-            .attr('class', function (d, i) {return 'compare-peptide ' + g.className + '-' + i + '-peptide';})
-            .attr('transform', function (d, i) {return 'translate(' + (i) + ') ';})
+        var nucsEnter = nucs.enter().append('g')
+            .attr('class', function (d, i) {return 'compare-nuc ' + g.className + '-' + i + '-nuc';})
+            .attr('transform', function (d, i) {return 'translate(' + (i) + ','+ (rowHeight*0.05) +') ';})
             .on('mouseover', function(d,i){onCompareMouseOver(genes,d,i)})
             .on("click", function(d,i){geneClick(genes,d,i)})
             .on('mouseout', function(d,i){onCompareMouseOut(genes,d,i)});
 
-        peptidesEnter.append('rect')
-            .attr('class', 'compare-peptide-rect')
+        nucsEnter.append('rect')
+            .attr('class', 'compare-nuc-rect')
             .attr('width', 0.95)
-            .attr('height', 15)
+            .attr('height', Math.round(rowHeight*0.9))
             .attr('stroke', function(d,i){return g.compareColor[i];})
             .attr('stroke-width', 0.05)
             .attr('fill', function(d,i){return g.compareColor[i];});
 
         // Add the blank text for now
-        peptidesEnter.append('text')
-            .attr('class', 'compare-peptide-text')
-            .attr('y', 11)
+        nucsEnter.append('text')
+            .attr('class', 'compare-nuc-text')
+            .attr('y', (rowHeight/2) + 5)
             .attr('transform', 'translate(0.45)')
             .style('text-anchor', 'middle')
-            .style('font-size', 8)
-            .style('fill', '#000000');
+            .style('font-size', 10)
+            .style('fill', function(d){return nucColorMap[d]});
     });
 }
 
@@ -258,43 +239,40 @@ function zoomCompare() {
     var tx = Math.min(d3.event.translate[0],0);
     tx = Math.max(tx, xMax);
 
-    console.log('translate = ' + d3.event.translate[0]);
-
+    // Reset the zoom translation if we hit the bounds
     if(tx == xMax) {
         zoom.translate([xMax, 0]);
     }
+    if(tx == 0) {
+        zoom.translate([0,0]);
+    }
 
-    console.log('xMax = '+ xMax);
+    // Grab the nuc rows - don't need to do anything with them
+    var nucRows = sequenceGroup.selectAll(".compare-nuc-row").data(cGenes, function(d){return d.className});
 
-    console.log('tx = '+ tx);
+    nucRows.attr('transform', function(d,i){return 'translate('+ tx +','+ (i * rowOffset) + ') scale('+ newScale + ',1)';});
 
-    // Grab the peptide rows - don't need to do anything with them
-    var peptideRows = sequenceGroup.selectAll(".compare-peptide-row").data(cGenes, function(d){return d.className});
-
-    peptideRows.attr('transform', function(d,i){return 'translate('+ tx +','+ (i * rowOffset) + ') scale('+ newScale + ',1)';});
-
-    // Grab all peptides in each row
-    peptideRows.each(function(g){
-        var peptides = peptideRows.selectAll('.compare-peptide').data(function(d){return d.compareSequence;}, function(d,i){return g.className + '-' + i;});
-        var peptidesText = peptides.select('text');
+    // Grab all nucs in each row
+    nucRows.each(function(g){
+        var nucs = nucRows.selectAll('.compare-nuc').data(function(d){return d.compareSequence;}, function(d,i){return g.className + '-' + i;});
+        var nucsText = nucs.select('text');
 
         if(newScale > 10){
-            peptidesText.text(function(d){return (d != 'Z' ? d : '')})
+            nucsText.text(function(d){return (d != 'Z' ? d : '')})
                 .attr('transform','translate(0.5) scale('+ iNewScale + ',1)');
         } else {
             // Remove the text from the element
-            peptidesText.text('');
+            nucsText.text('');
         }
     });
 }
 
 function geneClick(genes,d,i){
 
-    var peptide = peptideMap[d.value];
-    var basePeptide = peptideMap[d.baseGene];
+    var nuc = nucMap[d.value];
 
     genes.forEach(function(g){
-        var column = d3.selectAll('.' + g.className + '-'+ i + '-peptide');
+        var column = d3.selectAll('.' + g.className + '-'+ i + '-nuc');
         column.select('rect')
             .attr('stroke', '#000')
             .attr('stroke-width', 0.05);
@@ -329,15 +307,17 @@ function hideCompareTip(){
 
 function onCompareMouseOut(genes,d,i){
     genes.forEach(function(g){
-        var column = d3.selectAll('.' + g.className + '-'+ i + '-peptide');
-        column.select('rect').classed('peptide-highlight', false);
+        var column = d3.selectAll('.' + g.className + '-'+ i + '-nuc');
+        column.select('rect').classed('compare-nuc-highlight', false);
+        column.select('text').classed('compare-nuc-highlight', false);
     });
 }
 
 function onCompareMouseOver(genes,d,i){
     genes.forEach(function(g){
-        var column = d3.selectAll('.' + g.className + '-'+ i + '-peptide');
-        column.select('rect').classed('peptide-highlight', true);
+        var column = d3.selectAll('.' + g.className + '-'+ i + '-nuc');
+        column.select('rect').classed('compare-nuc-highlight', true);
+        column.select('text').classed('compare-nuc-highlight', true);
     });
 }
 

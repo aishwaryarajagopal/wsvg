@@ -384,7 +384,8 @@ body {
     fill: #FFF;
 }
 
-.peptide-highlight {
-    stroke: #000;
+.compare-nuc-highlight {
+    stroke: #333;
     stroke-width: 0.05;
+    font-weight: bold;
 }
